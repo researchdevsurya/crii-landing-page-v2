@@ -1,0 +1,746 @@
+/**
+ * Career Ready India Initiative – Official Homepage
+ * Light theme, hero background image, deliverables as individual sections
+ */
+import { useState, useEffect, useRef } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import {
+  ArrowRight,
+  CheckCircle2,
+  BookOpen,
+  BrainCircuit,
+  Target,
+  GraduationCap,
+  Users,
+  FileText,
+  Library,
+  ChevronDown,
+  ChevronUp,
+  Sparkles,
+  ArrowUpRight,
+  Play,
+  Star,
+  Shield,
+  Zap,
+  TrendingUp,
+} from "lucide-react";
+import heroImg from "../assets/heroimg.png";
+import ProgrammeIntro from "./ProgrammeIntro";
+import TrustedByLeaders from "./TrustedByLeaders";
+import NoFeeSection from "./NoFeeSection";
+import SEO from "../components/SEO";
+
+/* ─── 7 Deliverables Data ─── */
+const DELIVERABLES = [
+  {
+    id: "platform",
+    number: "01",
+    label: "The Education Decision Platform",
+    icon: BookOpen,
+    heading: "Give students the information behind every decision",
+    description:
+      "The Education Decision platform helps students understand the academic and professional outcomes connected to their choices.",
+    lead: "Students can explore:",
+    bullets: [
+      "Careers and specialisations",
+      "Courses and qualifications",
+      "Colleges and universities",
+      "Entrance examinations",
+      "Fees and education loans",
+      "Salaries and placements",
+      "Work culture",
+      "Career progression",
+      "Opportunities and threats",
+      "Rankings, hostels and college reputation",
+    ],
+    closing:
+      "Students can move beyond general career names and understand what each path requires, where it leads and what it may deliver.",
+    accent: "#2563eb",
+    accentLight: "#eff6ff",
+    accentBorder: "#bfdbfe",
+    gradient: "linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)",
+  },
+  {
+    id: "psychometric",
+    number: "02",
+    label: "Psychometric Assessments",
+    icon: BrainCircuit,
+    heading: "Help students understand themselves",
+    description:
+      "Participating schools receive unlimited psychometric assessments and student results.",
+    lead: "The assessments help students and counsellors examine the factors that influence career fit, including:",
+    bullets: [
+      "Aptitude",
+      "Skills",
+      "Interests",
+      "Personality",
+      "Strengths",
+      "Preferences",
+      "Career suitability",
+    ],
+    closing:
+      "There is no per-student assessment limit for participating schools.",
+    accent: "#7c3aed",
+    accentLight: "#f5f3ff",
+    accentBorder: "#ddd6fe",
+    gradient: "linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%)",
+  },
+  {
+    id: "specialisation",
+    number: "03",
+    label: "Specialisation Assessments",
+    icon: Target,
+    heading: "Help students make more precise choices",
+    description:
+      "A broad career field can contain several very different specialisations. Students need to understand which option within a field is most suitable for them.",
+    lead: "Schools receive access to 346 specialisation assessments that help students:",
+    bullets: [
+      "Explore different specialisations",
+      "Compare closely related fields",
+      "Confirm their suitability for a chosen option",
+      "Identify stronger alternatives",
+      "Make better-informed academic decisions",
+    ],
+    closing: "",
+    accent: "#e11d48",
+    accentLight: "#fff1f2",
+    accentBorder: "#fecdd3",
+    gradient: "linear-gradient(135deg, #e11d48 0%, #f43f5e 100%)",
+  },
+  {
+    id: "training",
+    number: "04",
+    label: "Counsellor Training",
+    icon: GraduationCap,
+    heading: "Build lasting capability within your school",
+    description:
+      "The Career Counsellor Practitioner Programme trains nominated school staff in current career counselling methods, tools and techniques.",
+    lead: "The programme includes Foundation and Master-level training designed to help school counsellors:",
+    bullets: [
+      "Understand career psychology",
+      "Interpret student assessments",
+      "Research education and career options",
+      "Guide subject and stream decisions",
+      "Support course and college selection",
+      "Structure career counselling conversations",
+    ],
+    closing:
+      "The objective is to build permanent capability within the school.",
+    accent: "#059669",
+    accentLight: "#ecfdf5",
+    accentBorder: "#a7f3d0",
+    gradient: "linear-gradient(135deg, #059669 0%, #10b981 100%)",
+  },
+  {
+    id: "counselling",
+    number: "05",
+    label: "Career Counselling",
+    icon: Users,
+    heading: "Give students access to professional guidance",
+    description:
+      "Participating schools receive professional career counselling support.",
+    lead: "Counsellors help students bring together their assessment results, interests, academic profile, aspirations and practical limitations to make informed decisions about:",
+    bullets: [
+      "Subjects and streams",
+      "Career fields",
+      "Courses",
+      "Colleges",
+      "Entrance examinations",
+      "Alternative academic pathways",
+    ],
+    closing: "",
+    accent: "#d97706",
+    accentLight: "#fffbeb",
+    accentBorder: "#fde68a",
+    gradient: "linear-gradient(135deg, #d97706 0%, #f59e0b 100%)",
+  },
+  {
+    id: "application",
+    number: "06",
+    label: "Application Support",
+    icon: FileText,
+    heading: "Help students act on their decisions",
+    description:
+      "Career decisions must eventually translate into applications, examinations and admissions.",
+    lead: "Application support helps students manage:",
+    bullets: [
+      "Entrance examination requirements",
+      "Course and college shortlisting",
+      "Application timelines",
+      "Documentation",
+      "Form submissions",
+      "Deadline tracking",
+      "Admission decisions",
+    ],
+    closing:
+      "The programme helps ensure that students do not miss an examination, deadline or opportunity because of confusion during the application process.",
+    accent: "#0891b2",
+    accentLight: "#ecfeff",
+    accentBorder: "#a5f3fc",
+    gradient: "linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)",
+  },
+  {
+    id: "resources",
+    number: "07",
+    label: "Resources & Community",
+    icon: Library,
+    heading: "Reimagine career readiness with these resources",
+    description:
+      "Participating schools receive structured books, e-books, research, toolkits and training resources to support career readiness throughout the academic year.",
+    lead: "",
+    bullets: [],
+    closing:
+      "These resources help schools make career education continuous, structured and accessible. Schools also become part of a national community of career counsellors across India, creating opportunities to learn, exchange ideas and strengthen counselling practices.",
+    accent: "#4f46e5",
+    accentLight: "#eef2ff",
+    accentBorder: "#c7d2fe",
+    gradient: "linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)",
+  },
+];
+
+/* ─── Animated counter hook ─── */
+function useCountUp(end, duration = 2000) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          const start = 0;
+          const startTime = performance.now();
+          const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(start + (end - start) * eased));
+            if (progress < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [end, duration]);
+
+  return [count, ref];
+}
+
+/* ─── Single Deliverable Section Component ─── */
+function DeliverableSection({ item, index, applyUrl }) {
+  const isReversed = index % 2 !== 0;
+  const Icon = item.icon;
+
+  return (
+    <section
+      className="relative py-20 md:py-28 overflow-hidden"
+      style={{ backgroundColor: index % 2 === 0 ? "#ffffff" : "#FAFBFC" }}
+    >
+      {/* Subtle decorative orb */}
+      <div
+        className="absolute w-[500px] h-[500px] rounded-full blur-[120px] opacity-[0.06] pointer-events-none"
+        style={{
+          background: item.gradient,
+          top: isReversed ? "auto" : "-10%",
+          bottom: isReversed ? "-10%" : "auto",
+          right: isReversed ? "auto" : "-5%",
+          left: isReversed ? "-5%" : "auto",
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+        <div
+          className={`flex flex-col ${isReversed ? "lg:flex-row-reverse" : "lg:flex-row"
+            } gap-12 lg:gap-20 items-start`}
+        >
+          {/* Left/Right: Content */}
+          <div className="flex-1 w-full" data-aos="fade-up">
+            {/* Number + Label */}
+            <div className="flex items-center gap-4 mb-6">
+              <span
+                className="inline-flex items-center justify-center w-11 h-11 rounded-xl text-white text-sm font-bold"
+                style={{ background: item.gradient }}
+              >
+                {item.number}
+              </span>
+              <span
+                className="text-xs font-bold uppercase tracking-[0.2em]"
+                style={{ color: item.accent }}
+              >
+                {item.label}
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-slate-900 tracking-tight leading-[1.15] mb-6">
+              {item.heading}
+            </h2>
+
+            {/* Description */}
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8 max-w-2xl">
+              {item.description}
+            </p>
+
+            {/* Lead text */}
+            {item.lead && (
+              <p className="text-base md:text-lg font-semibold text-slate-800 mb-5">
+                {item.lead}
+              </p>
+            )}
+
+            {/* Bullets */}
+            {item.bullets.length > 0 && (
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 mb-8">
+                {item.bullets.map((b) => (
+                  <li
+                    key={b}
+                    className="flex items-start gap-3 text-base text-slate-600"
+                  >
+                    <CheckCircle2
+                      size={18}
+                      className="mt-0.5 shrink-0"
+                      style={{ color: item.accent }}
+                    />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Closing note */}
+            {item.closing && (
+              <div
+                className="rounded-xl px-5 py-4 border"
+                style={{
+                  backgroundColor: item.accentLight,
+                  borderColor: item.accentBorder,
+                }}
+              >
+                <p className="text-sm md:text-base text-slate-700 leading-relaxed">
+                  {item.closing}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Right/Left: Visual Card */}
+          <div
+            className="flex-shrink-0 w-full lg:w-[340px] xl:w-[380px]"
+            data-aos={isReversed ? "fade-right" : "fade-left"}
+            data-aos-delay="200"
+          >
+            <div
+              className="relative rounded-3xl p-8 md:p-10 border overflow-hidden"
+              style={{
+                backgroundColor: item.accentLight,
+                borderColor: item.accentBorder,
+              }}
+            >
+              {/* Background pattern */}
+              <div
+                className="absolute inset-0 opacity-[0.04]"
+                style={{
+                  backgroundImage: `radial-gradient(${item.accent} 1px, transparent 1px)`,
+                  backgroundSize: "24px 24px",
+                }}
+              />
+
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <div
+                  className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-lg"
+                  style={{ background: item.gradient }}
+                >
+                  <Icon size={36} className="text-white" />
+                </div>
+                <h3
+                  className="text-xl font-bold mb-3"
+                  style={{ color: item.accent }}
+                >
+                  {item.label}
+                </h3>
+                <p className="text-sm text-slate-500 leading-relaxed mb-6">
+                  Part of the Career Ready India programme delivered to your
+                  school at no cost.
+                </p>
+                <div
+                  className="w-full h-px mb-6"
+                  style={{ backgroundColor: item.accentBorder }}
+                />
+                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-widest">
+                  <span
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: item.accent }}
+                  />
+                  Deliverable {item.number} of 07
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function HomePage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id") || "";
+  const src = searchParams.get("src") || "";
+
+  let applyUrl = "/apply";
+  const urlParams = new URLSearchParams();
+  if (id) urlParams.append("id", id);
+  if (src) urlParams.append("src", src);
+  const paramStr = urlParams.toString();
+  if (paramStr) {
+    applyUrl = `/apply?${paramStr}`;
+  }
+
+  const [stat1, stat1Ref] = useCountUp(10000, 2200);
+
+  return (
+    <main>
+      <SEO
+        title="Career Ready India Initiative | School Career Counselling & Guidance"
+        description="Empower your school with Career Ready India. Get free psychometric tests, counsellor training, & comprehensive career guidance programs for students in India."
+        keywords="Career Ready India, Career guidance for schools in India, Career counselling programs for students, Employability programs for schools, School career readiness initiatives"
+      />
+
+      {/* ════════════════ HERO ════════════════ */}
+      <section
+        className="relative min-h-[100dvh] w-full flex items-center overflow-hidden"
+        style={{
+          backgroundImage: `url(${heroImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Layered gradient overlays for readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/[0.92] via-white/70 to-white/20 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60 pointer-events-none" />
+
+        {/* Subtle texture */}
+        <div
+          className="absolute inset-0 opacity-30 pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239CA3AF' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pt-32 sm:pt-36 md:pt-44 lg:pt-40 pb-20 sm:pb-16">
+          <div className="w-full lg:w-[65%] xl:w-[58%]">
+            {/* Badge */}
+
+
+            {/* Headline */}
+            <h1
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.75rem] xl:text-7xl font-normal text-slate-900 tracking-tight leading-[1.08]"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <span className="relative inline-block text-blue-600">
+                9 in 10
+                <svg
+                  className="absolute -bottom-2 left-0 w-full h-3 text-blue-400/40"
+                  viewBox="0 0 100 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 8.5C20 2.5 60 -1.5 99 8.5"
+                    stroke="currentColor"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>{" "}
+              graduates work outside what they studied
+            </h1>
+
+            {/* Subtext */}
+            <div
+              className="mt-8 md:mt-10 space-y-4 max-w-2xl"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-slate-700 font-medium">
+                Career Ready India brings assessments, counsellor training and
+                guidance to{" "}
+                <strong className="text-slate-900 font-bold">10,000+</strong>{" "}
+                schools at no cost — because every student deserves informed
+                career decisions.
+              </p>
+            </div>
+
+            {/* CTA Row */}
+            <div
+              className="mt-10 md:mt-12 flex flex-wrap items-center gap-5"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <Link
+                to={applyUrl}
+                className="group relative inline-flex items-center justify-center gap-3 bg-blue-600 text-white font-semibold px-8 py-4 rounded-xl shadow-[0_8px_30px_-8px_rgba(37,99,235,0.4)] hover:shadow-[0_16px_40px_-10px_rgba(37,99,235,0.5)] transition-all duration-300 hover:bg-blue-700 active:scale-[0.97] text-sm md:text-base overflow-hidden"
+              >
+                {/* Sweep effect */}
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <span className="relative z-10 flex items-center gap-3">
+                  Apply to Career Ready India
+                  <ArrowRight
+                    size={18}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </span>
+              </Link>
+
+              <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+                <Shield size={14} className="text-emerald-500" />
+                <span>No application fee · Zero cost for selected schools</span>
+              </div>
+            </div>
+
+            {/* NEP 2020 alignment pill */}
+            <div
+              className="mt-8 inline-flex items-center gap-2 bg-blue-50/80 border border-blue-100 rounded-lg px-4 py-2"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <Sparkles size={14} className="text-blue-500" />
+              <span className="text-xs font-semibold text-blue-700 tracking-wide">
+                Aligned with NEP 2020 Career Education Goals
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+      </section>
+
+      {/* ════════════════ STATS BAR ════════════════ */}
+      <section className="relative bg-white py-6 border-b border-slate-100">
+        <div
+          ref={stat1Ref}
+          className="max-w-7xl mx-auto px-6 md:px-10"
+        >
+          <div
+            className="flex flex-col sm:flex-row items-center justify-center gap-8 md:gap-16 py-6"
+            data-aos="fade-up"
+          >
+            {[
+              { value: "91.75%", sub: "Graduate Mismatch Rate" },
+              { value: `${stat1.toLocaleString()}+`, sub: "Schools Targeted" },
+              { value: "346", sub: "Specialisation Assessments" },
+              { value: "₹0", sub: "Cost to Schools" },
+            ].map((s, i) => (
+              <div key={i} className="flex flex-col items-center text-center group">
+                <span className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                  {s.value}
+                </span>
+                <span className="text-xs md:text-sm text-slate-500 font-medium mt-1 tracking-wide uppercase">
+                  {s.sub}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════ THE PROBLEM ════════════════ */}
+      <section className="py-24 md:py-32 bg-white">
+        <div className="max-w-5xl mx-auto px-6 md:px-10 text-center">
+          <p
+            data-aos="fade-up"
+            className="text-[11px] md:text-xs tracking-[0.3em] font-bold uppercase text-slate-400 mb-8"
+          >
+            The Problem
+          </p>
+
+          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-[3.5rem] font-semibold tracking-tight leading-[1.15] text-slate-900">
+            <span data-aos="fade-up" data-aos-delay="100" className="block">
+              91.75% of graduates do not work
+            </span>
+            <span data-aos="fade-up" data-aos-delay="250" className="block mt-2">
+              in jobs that match their studies
+            </span>
+          </h2>
+
+          {/* Elegant divider */}
+          <div
+            className="flex items-center justify-center gap-3 my-10"
+            data-aos="fade-up"
+            data-aos-delay="350"
+          >
+            <div className="h-px w-16 bg-slate-200" />
+            <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+            <div className="h-px w-16 bg-slate-200" />
+          </div>
+
+          <div data-aos="fade-up" data-aos-delay="400">
+            <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-2xl mx-auto">
+              Not for lack of seats or degrees — but because many students
+              choose a field{" "}
+              <span className="text-slate-700 font-semibold">
+                without knowing what that field actually requires
+              </span>
+              , where it leads, or what it delivers.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════ PROGRAMME INTRO ════════════════ */}
+      <ProgrammeIntro />
+
+      {/* ════════════════ NO FEE SECTION ════════════════ */}
+      <NoFeeSection applyUrl={applyUrl} />
+
+      {/* ════════════════ DELIVERABLES HEADER ════════════════ */}
+      <section className="pt-24 md:pt-32 pb-4 bg-white">
+        <div className="max-w-5xl mx-auto px-6 md:px-10 text-center">
+          <p
+            data-aos="fade-up"
+            className="text-[11px] md:text-xs tracking-[0.3em] font-bold uppercase text-slate-400 mb-6"
+          >
+            What Your School Receives
+          </p>
+          <h2
+            data-aos="fade-up"
+            data-aos-delay="100"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-[1.15]"
+          >
+            7 Integrated Deliverables from{" "}
+            <span className="relative inline-block text-blue-600">
+              Career Ready India
+              <svg
+                className="absolute -bottom-2 left-0 w-full h-3 text-blue-400/30"
+                viewBox="0 0 100 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 8.5C20 2.5 60 -1.5 99 8.5"
+                  stroke="currentColor"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+          </h2>
+          <p
+            data-aos="fade-up"
+            data-aos-delay="200"
+            className="mt-6 text-base md:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed"
+          >
+            Each deliverable is designed to work together — building a complete
+            career readiness ecosystem within your school.
+          </p>
+        </div>
+      </section>
+
+      {/* ════════════════ INDIVIDUAL DELIVERABLE SECTIONS ════════════════ */}
+      {DELIVERABLES.map((item, index) => (
+        <DeliverableSection
+          key={item.id}
+          item={item}
+          index={index}
+          applyUrl={applyUrl}
+        />
+      ))}
+
+      {/* ════════════════ FINAL CTA ════════════════ */}
+      <section className="relative py-28 md:py-36 bg-[#FAFBFC] overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/[0.04] rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/[0.04] rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none" />
+
+        <div className="max-w-5xl mx-auto px-6 md:px-10">
+          <div
+            className="relative rounded-[2rem] md:rounded-[2.5rem] bg-white border border-slate-200/80 px-8 md:px-14 py-16 md:py-20 text-center overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)]"
+            data-aos="fade-up"
+          >
+            {/* Top accent line */}
+            <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
+
+            <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
+              {/* Badge */}
+              <div
+                className="inline-flex items-center gap-2.5 bg-amber-50 border border-amber-200/80 text-amber-700 font-bold text-[12px] uppercase tracking-widest px-5 py-2.5 rounded-full mb-8"
+                data-aos="fade-down"
+                data-aos-delay="100"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
+                </span>
+                Applications open for 2026
+              </div>
+
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight text-slate-900 mb-6"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                Ready to make your school career ready?
+              </h2>
+
+              <p
+                className="text-base md:text-lg leading-relaxed text-slate-500 max-w-lg mb-10"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
+                Apply today. There is no fee. Selected schools receive the
+                complete programme at no cost.
+              </p>
+
+              <div
+                className="flex flex-col items-center gap-4 w-full"
+                data-aos="fade-up"
+                data-aos-delay="400"
+              >
+                <Link
+                  to={applyUrl}
+                  className="group inline-flex items-center gap-3 bg-slate-900 text-white font-bold px-10 py-4.5 rounded-xl text-base transition-all duration-300 hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/25 active:scale-[0.98] overflow-hidden relative"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <span className="relative z-10 flex items-center gap-3">
+                    Apply to Career Ready India
+                    <ArrowRight
+                      size={18}
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                    />
+                  </span>
+                </Link>
+
+                <p className="text-xs text-slate-400 mt-2 tracking-wide">
+                  No cost for selected schools · Zero fee to apply
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ Scoped keyframe animation ═══ */}
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fadeInUp 0.5s ease-out forwards;
+        }
+      `}</style>
+    </main>
+  );
+}

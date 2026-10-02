@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
+@import "tailwindcss";
+@theme {
+  --color-gov-blue: #003366;
+  --color-gov-blue-dark: #002244;
+  --color-gov-blue-light: #e8f0fe;
+  --color-gov-gold: #c4861b;
+  --color-gov-gold-light: #fdf6e3;
+  --color-gov-green: #1a6b3c;
+  --color-gov-green-light: #e6f4ec;
+  --color-gov-red: #b91c1c;
+  --color-gov-gray-50: #f8f9fa;
+  --color-gov-gray-100: #f1f3f5;
+  --color-gov-gray-200: #e9ecef;
+  --color-gov-gray-300: #dee2e6;
+  --color-gov-gray-400: #adb5bd;
+  --color-gov-gray-500: #6c757d;
+  --color-gov-gray-600: #495057;
+  --color-gov-gray-700: #343a40;
+  --color-gov-gray-800: #212529;
+  --color-gov-border: #c9d1d9;
+  --font-sans: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-google: 'Google Sans Flex', sans-serif;
+}
+
+/* Base resets */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* border : 1px solid red; */
+}
+
+html {
+  font-family: 'Google Sans Flex', sans-serif;
+  /* Prevent scroll chaining — stops the "bounce" that causes gesture glitches on tablets */
+  overscroll-behavior-y: none;
+}
+
+body {
+  margin: 0;
+  font-family: 'Google Sans Flex', sans-serif;
+  color: var(--color-gov-gray-700);
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  /* Smooth momentum scrolling on iOS/iPad */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent scroll chaining on body too */
+  overscroll-behavior-y: none;
+}
+
+/* Ensure sticky sections don't intercept horizontal gestures on tablet */
+section {
+  touch-action: pan-y;
+}
+
+/* Government-style top stripe */
+.gov-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%);
+}
+
+/* Form focus ring */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--color-gov-blue);
+  outline-offset: 1px;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+button:focus,
+button:active,
+button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.fade-in-delay-1 {
+  animation-delay: 150ms;
+}
+
+.fade-in-delay-2 {
+  animation-delay: 300ms;
+}
+
+.fade-in-delay-3 {
+  animation-delay: 450ms;
+}

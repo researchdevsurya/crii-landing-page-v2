@@ -1,0 +1,289 @@
+// import React, { useEffect, useRef, useState } from "react";
+// import gsap from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// const audiences = [
+//   {
+//     id: "principals",
+//     number: "01",
+//     label: "For Principals",
+//     title: "Build the system.",
+//     description:
+//       "Create a structured career and college readiness system across the school.",
+//     points: [
+//       "Build a structured career and college readiness system across the school.",
+//       "Understand student aspirations and strengthen the school's guidance capability.",
+//     ],
+//     accent: "from-blue-500/20 via-indigo-500/10 to-transparent",
+//     dot: "bg-blue-500",
+//   },
+//   {
+//     id: "counsellors",
+//     number: "02",
+//     label: "For Counsellors",
+//     title: "Guide with clarity.",
+//     description:
+//       "Bring assessments, information, research and structured tools into better student conversations.",
+//     points: [
+//       "Use assessments, information, research and structured tools to support better student conversations.",
+//       "Develop professional capability while working within one connected system.",
+//     ],
+//     accent: "from-violet-500/20 via-purple-500/10 to-transparent",
+//     dot: "bg-violet-500",
+//   },
+//   {
+//     id: "students",
+//     number: "03",
+//     label: "For Students",
+//     title: "Make informed decisions.",
+//     description:
+//       "Understand yourself, explore what is possible, and make education decisions with confidence.",
+//     points: [
+//       "Understand yourself.",
+//       "Explore what is possible.",
+//       "Research your options.",
+//       "Make informed education decisions.",
+//     ],
+//     accent: "from-emerald-500/20 via-teal-500/10 to-transparent",
+//     dot: "bg-emerald-500",
+//   },
+// ];
+
+// function AudienceSection() {
+//   const sectionRef = useRef(null);
+//   const triggerRef = useRef(null);
+
+//   const [activeIndex, setActiveIndex] = useState(0);
+//   const activeIndexRef = useRef(0);
+//   activeIndexRef.current = activeIndex;
+
+//   const targetIndexRef = useRef(0);
+//   const currentIndexRef = useRef(0);
+//   const isSteppingRef = useRef(false);
+
+//   // Stepper: ensures transitions ALWAYS advance 1-by-1 with a comfortable pause,
+//   // preventing any instant skips directly to the last slide even on fast scrolls.
+//   const stepTowardsTarget = () => {
+//     if (isSteppingRef.current) return;
+//     if (currentIndexRef.current === targetIndexRef.current) return;
+
+//     isSteppingRef.current = true;
+//     const nextIndex =
+//       currentIndexRef.current < targetIndexRef.current
+//         ? currentIndexRef.current + 1
+//         : currentIndexRef.current - 1;
+
+//     currentIndexRef.current = nextIndex;
+//     setActiveIndex(nextIndex);
+
+//     setTimeout(() => {
+//       isSteppingRef.current = false;
+//       if (currentIndexRef.current !== targetIndexRef.current) {
+//         stepTowardsTarget();
+//       }
+//     }, 380);
+//   };
+
+//   useEffect(() => {
+//     const ctx = gsap.context(() => {
+//       const st = ScrollTrigger.create({
+//         trigger: sectionRef.current,
+//         start: "top top",
+//         end: () => `+=${window.innerHeight * 1.8}`,
+//         pin: true,
+//         anticipatePin: 1,
+//         invalidateOnRefresh: true,
+//         onUpdate: (self) => {
+//           const p = self.progress;
+//           let target = 0;
+//           if (p >= 0.65) {
+//             target = 2;
+//           } else if (p >= 0.28) {
+//             target = 1;
+//           } else {
+//             target = 0;
+//           }
+
+//           if (targetIndexRef.current !== target) {
+//             targetIndexRef.current = target;
+//             stepTowardsTarget();
+//           }
+//         },
+//       });
+
+//       triggerRef.current = st;
+//     }, sectionRef);
+
+//     return () => ctx.revert();
+//   }, []);
+
+//   const active = audiences[activeIndex] || audiences[0];
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       className="relative h-screen w-full bg-[#f7f7f5] text-[#111] dark:bg-[#08090b] dark:text-white overflow-hidden flex items-center"
+//     >
+//       {/* =========================================================
+//           CONTENT
+//       ========================================================== */}
+
+//       <div className="relative flex h-full w-full items-center overflow-hidden">
+//         {/* =====================================================
+//             BACKGROUND GLOW
+//         ====================================================== */}
+
+//         <div className="pointer-events-none absolute inset-0 overflow-hidden">
+//           {audiences.map((audience, index) => (
+//             <div
+//               key={audience.id}
+//               className={`
+//                 absolute inset-0
+//                 bg-gradient-to-br
+//                 ${audience.accent}
+//                 transition-all duration-500 ease-out
+//               `}
+//               style={{
+//                 opacity: activeIndex === index ? 1 : 0,
+//                 transform: activeIndex === index ? "scale(1)" : "scale(1.05)",
+//               }}
+//             />
+//           ))}
+
+//           {/* subtle radial light */}
+//           <div
+//             className="
+//               absolute
+//               left-1/2
+//               top-1/2
+//               h-[700px]
+//               w-[700px]
+//               -translate-x-1/2
+//               -translate-y-1/2
+//               rounded-full
+//               bg-white/50
+//               blur-[140px]
+//               dark:bg-white/[0.025]
+//             "
+//           />
+//         </div>
+
+//         {/* =====================================================
+//             MAIN CONTAINER (CENTERED)
+//         ====================================================== */}
+
+//         <div className="relative mx-auto flex min-h-screen w-full max-w-[1200px] flex-col items-center justify-center px-6 text-center sm:px-10 lg:px-16">
+//           {/* Main heading — displays for each scroll */}
+//           <div className="relative min-h-[140px] w-full max-w-[900px] sm:min-h-[180px] lg:min-h-[220px]">
+//             {[
+//               "One Programme.",
+//               "Different People.",
+//               "Connected Decisions.",
+//             ].map((line, index) => {
+//               const isActive = index === activeIndex;
+
+//               return (
+//                 <h2
+//                   key={line}
+//                   className="
+//                     absolute
+//                     inset-x-0
+//                     top-0
+//                     text-center
+//                     text-[clamp(3.2rem,6.5vw,7rem)]
+//                     font-semibold
+//                     leading-[1.06]
+//                     tracking-[-0.04em]
+//                     text-[#111]
+//                     transition-all
+//                     duration-350
+//                     ease-out
+//                     dark:text-white
+//                   "
+//                   style={{
+//                     opacity: isActive ? 1 : 0,
+//                     transform: isActive
+//                       ? "translateY(0)"
+//                       : index < activeIndex
+//                         ? "translateY(-20px)"
+//                         : "translateY(20px)",
+//                     pointerEvents: isActive ? "auto" : "none",
+//                   }}
+//                 >
+//                   {line}
+//                 </h2>
+//               );
+//             })}
+//           </div>
+
+//           {/* Supporting statement */}
+//           <div className="mt-6 max-w-[620px] text-center sm:mt-8">
+//             <p className="text-base leading-7 text-black/60 dark:text-white/60 sm:text-xl sm:leading-8">
+//               One connected programme brings together the people,
+//               information and decisions that shape a student's education
+//               journey.
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* =====================================================
+//             SIDE NAVIGATION
+//         ====================================================== */}
+
+//         <div
+//           className="
+//             absolute
+//             bottom-7
+//             left-1/2
+//             hidden
+//             -translate-x-1/2
+//             items-center
+//             gap-6
+//             md:flex
+//           "
+//         >
+//           {audiences.map((audience, index) => (
+//             <button
+//               key={audience.id}
+//               onClick={() => {
+//                 targetIndexRef.current = index;
+//                 currentIndexRef.current = index;
+//                 setActiveIndex(index);
+//                 if (triggerRef.current) {
+//                   const st = triggerRef.current;
+//                   const targetScroll =
+//                     st.start +
+//                     (index / (audiences.length - 1)) * (st.end - st.start);
+//                   window.scrollTo({ top: targetScroll, behavior: "smooth" });
+//                 }
+//               }}
+//               className="flex items-center cursor-pointer"
+//             >
+//               <span
+//                 className={`
+//                   text-[11px]
+//                   font-medium
+//                   uppercase
+//                   tracking-[0.16em]
+//                   transition-all
+//                   duration-300
+//                   ${
+//                     index === activeIndex
+//                       ? "opacity-90 font-semibold text-black dark:text-white"
+//                       : "opacity-30 hover:opacity-60 text-black dark:text-white"
+//                   }
+//                 `}
+//               >
+//                 {audience.label.replace("For ", "")}
+//               </span>
+//             </button>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default AudienceSection;

@@ -1,0 +1,366 @@
+// import React, { useEffect, useRef, useState, useCallback } from "react";
+
+// /* =========================================================
+//    IMAGES & ASSETS
+// ========================================================= */
+// import imgtest from "../../assets/Feature/feature1.png";
+// import providedFeature1 from "../../assets/Feature/providedFeatures1.png";
+// import providedFeature2 from "../../assets/Feature/providedFeature2.png";
+// import providedFeature3 from "../../assets/Feature/providedFeature3.png";
+// import providedFeature4 from "../../assets/Feature/providedFeature4.png";
+// import providedFeature5 from "../../assets/Feature/providedFeature5.png";
+// import providedFeature6 from "../../assets/Feature/providedFeature6.png";
+// import providedFeature7 from "../../assets/Feature/providedFeature7.png";
+// import impVedio from "../../assets/imp_vedio.mp4";
+
+// /* =========================================================
+//    PROVIDED COMPLETELY AT NO COST DATA
+// ========================================================= */
+// const providedFeatures = [
+//   {
+//     number: "01",
+//     title: "Careers. Courses. Colleges. Entrance exams. And more.",
+//     description:
+//       "Everything students need to make informed education decisions. All in one place.",
+//     video: impVedio,
+//     image: providedFeature1,
+//   },
+//   {
+//     number: "02",
+//     title: "Know more about every student.",
+//     description:
+//       "Aptitude. Interests. Skills. Personality. Unlimited assessments with complete career reports.",
+//     image: providedFeature2,
+//   },
+//   {
+//     number: "03",
+//     title: "Go beyond the career. Find the right specialisation.",
+//     description:
+//       "346 assessments help students explore their fit within a chosen field.",
+//     image: providedFeature3,
+//   },
+//   {
+//     number: "04",
+//     title: "Career guidance grows stronger when schools build it in-house.",
+//     description:
+//       "A structured practitioner programme for counsellors and educators, with learning, practice and evaluation.",
+//     image: providedFeature4,
+//   },
+//   {
+//     number: "05",
+//     title: "Better decisions begin with better guidance.",
+//     description:
+//       "Career counselling for students across career psychology, academic choices, applications and admissions.",
+//     image: providedFeature5,
+//   },
+//   {
+//     number: "06",
+//     title: "Career education. Ready for the classroom.",
+//     description:
+//       "Structured, grade-wise content designed to run on the school’s existing smart boards.",
+//     image: providedFeature6,
+//   },
+//   {
+//     number: "07",
+//     title: "Read. Explore. Decide with more confidence.",
+//     description:
+//       "11 career readiness books and e-books designed around the decisions students make through school.",
+//     image: providedFeature7,
+//   },
+// ];
+
+// /* =========================================================
+//    MAIN COMPONENT: TRANSFORM-BASED CAROUSEL (NO WINDOW SCROLL JUMP)
+// ========================================================= */
+// const ProvidedFeatures = () => {
+//   const sectionRef = useRef(null);
+//   const containerRef = useRef(null);
+//   const cardRefs = useRef([]);
+//   const touchStartX = useRef(0);
+//   const isDragging = useRef(false);
+
+//   const [activeIndex, setActiveIndex] = useState(0);
+//   const [isInView, setIsInView] = useState(false);
+//   const [isUserPaused, setIsUserPaused] = useState(false);
+//   const [translateX, setTranslateX] = useState(0);
+
+//   // Play only when section is in viewport and user hasn't manually paused
+//   const isPlaying = isInView && !isUserPaused;
+
+//   // Observe when section enters/leaves viewport so it doesn't play prematurely
+//   useEffect(() => {
+//     const section = sectionRef.current;
+//     if (!section) return;
+
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         setIsInView(entry.isIntersecting);
+//       },
+//       {
+//         threshold: 0.2,
+//       },
+//     );
+
+//     observer.observe(section);
+//     return () => observer.disconnect();
+//   }, []);
+
+//   // Update track translateX position based on active card
+//   const updatePosition = useCallback(() => {
+//     const container = containerRef.current;
+//     const activeCard = cardRefs.current[activeIndex];
+//     if (!container || !activeCard) return;
+
+//     const containerWidth = container.clientWidth;
+//     const cardWidth = activeCard.offsetWidth;
+//     const cardLeft = activeCard.offsetLeft;
+
+//     // Center active card inside container
+//     const offset = cardLeft - (containerWidth - cardWidth) / 2;
+//     setTranslateX(-offset);
+//   }, [activeIndex]);
+
+//   useEffect(() => {
+//     updatePosition();
+//     window.addEventListener("resize", updatePosition);
+//     return () => window.removeEventListener("resize", updatePosition);
+//   }, [updatePosition]);
+
+//   // Autoplay functionality: only runs when section is visible in viewport
+//   useEffect(() => {
+//     if (!isPlaying) return;
+
+//     const interval = setInterval(() => {
+//       setActiveIndex((prev) => (prev + 1) % providedFeatures.length);
+//     }, 6500);
+
+//     return () => clearInterval(interval);
+//   }, [isPlaying]);
+
+//   const nextSlide = () => {
+//     setActiveIndex((prev) => (prev + 1) % providedFeatures.length);
+//   };
+
+//   const prevSlide = () => {
+//     setActiveIndex((prev) =>
+//       prev === 0 ? providedFeatures.length - 1 : prev - 1,
+//     );
+//   };
+
+//   // Touch Swipe Handlers for mobile
+//   const handleTouchStart = (e) => {
+//     touchStartX.current = e.touches[0].clientX;
+//   };
+
+//   const handleTouchEnd = (e) => {
+//     const diff = touchStartX.current - e.changedTouches[0].clientX;
+//     if (diff > 45) {
+//       nextSlide();
+//     } else if (diff < -45) {
+//       prevSlide();
+//     }
+//   };
+
+//   // Mouse Drag Handlers for desktop
+//   const handleMouseDown = (e) => {
+//     touchStartX.current = e.clientX;
+//     isDragging.current = true;
+//   };
+
+//   const handleMouseUp = (e) => {
+//     if (!isDragging.current) return;
+//     isDragging.current = false;
+//     const diff = touchStartX.current - e.clientX;
+//     if (diff > 50) {
+//       nextSlide();
+//     } else if (diff < -50) {
+//       prevSlide();
+//     }
+//   };
+
+//   const togglePlay = () => {
+//     setIsUserPaused((prev) => !prev);
+//   };
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       className="w-full bg-white py-16 sm:py-24 overflow-hidden select-none"
+//     >
+//       {/* HEADER */}
+//       <div className="mx-auto max-w-7xl px-6 lg:px-10 mb-8 sm:mb-12">
+//         <h2
+//           className="
+//             mx-auto max-w-7xl
+//             text-[clamp(3rem,4vw,5rem)]
+//             font-semibold
+//             leading-[0.94]
+//             tracking-[-0.045em]
+//             text-[#1E1E1E]"
+//         >
+//           Provided completely <span className="">at no cost.</span>
+//         </h2>
+//       </div>
+
+//       {/* TRANSFORM CAROUSEL CONTAINER */}
+//       <div
+//         ref={containerRef}
+//         onTouchStart={handleTouchStart}
+//         onTouchEnd={handleTouchEnd}
+//         onMouseDown={handleMouseDown}
+//         onMouseUp={handleMouseUp}
+//         className="w-full overflow-hidden cursor-grab active:cursor-grabbing py-4"
+//       >
+//         <div
+//           style={{
+//             transform: `translate3d(${translateX}px, 0, 0)`,
+//           }}
+//           className="
+//             flex
+//             gap-6
+//             sm:gap-8
+//             md:gap-10
+//             px-6
+//             sm:px-12
+//             lg:px-24
+//             w-max
+//             transition-transform
+//             duration-700
+//             ease-[cubic-bezier(0.16,1,0.3,1)]
+//             will-change-transform
+//           "
+//         >
+//           {providedFeatures.map((feature, idx) => (
+//             <article
+//               key={`${feature.number}-${idx}`}
+//               ref={(el) => (cardRefs.current[idx] = el)}
+//               onClick={() => setActiveIndex(idx)}
+//               className={`
+//                 shrink-0
+//                 w-[88vw]
+//                 max-w-[420px]
+//                 sm:max-w-none
+//                 sm:w-[680px]
+//                 md:w-[840px]
+//                 lg:w-[980px]
+//                 xl:w-[1080px]
+//                 aspect-[4/5]
+//                 sm:aspect-[16/11]
+//                 md:aspect-[16/10]
+//                 lg:aspect-[16/9.5]
+//                 rounded-[2rem]
+//                 sm:rounded-[2.5rem]
+//                 md:rounded-[3rem]
+//                 overflow-hidden
+//                 relative
+//                 shadow-none
+//                 border-0
+//                 transition-all
+//                 duration-500
+//                 ${
+//                   activeIndex === idx
+//                     ? "opacity-100 scale-100"
+//                     : "opacity-60 hover:opacity-85 scale-[0.98]"
+//                 }
+//               `}
+//             >
+//               {/* FLUSH FULL IMAGE / VIDEO WITH CARD BORDER RADIUS */}
+//               <div className="absolute inset-0 h-full w-full overflow-hidden">
+//                 {feature.video ? (
+//                   <video
+//                     src={feature.video}
+//                     autoPlay
+//                     loop
+//                     muted
+//                     playsInline
+//                     preload="metadata"
+//                     className="h-full w-full object-cover object-bottom"
+//                   />
+//                 ) : (
+//                   <img
+//                     src={feature.image || imgtest}
+//                     alt={feature.title}
+//                     className="h-full w-full object-cover object-bottom"
+//                   />
+//                 )}
+//               </div>
+
+//               {/* TOP SOFT GRADIENT FOR TEXT LEGIBILITY */}
+//               <div className="absolute inset-x-0 top-0 h-48 sm:h-56 md:h-64 bg-gradient-to-b from-white/90 via-white/50 to-transparent pointer-events-none" />
+
+//               {/* TOP HEADER CONTENT OVERLAID ON TOP */}
+//               <div className="relative z-10 text-center max-w-3xl mx-auto pt-5 sm:pt-9 md:pt-12 px-5 sm:px-12">
+//                 <h3 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[42px] font-medium tracking-tight text-[#1d1d1f] leading-snug">
+//                   {feature.title}
+//                 </h3>
+//                 {/* <p className="mt-1.5 sm:mt-3 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed text-[#1d1d1f]/85 font-normal max-w-2xl mx-auto line-clamp-3 sm:line-clamp-none">
+//                   {feature.description}
+//                 </p> */}
+//               </div>
+//             </article>
+//           ))}
+//         </div>
+//       </div>
+
+//       {/* APPLE-STYLE CONTROL BAR (PAGINATION CAPSULE + PLAY/PAUSE TOGGLE) */}
+//       <div className="mt-8 sm:mt-10 flex items-center justify-center gap-3.5">
+//         {/* DOTS PAGINATION CAPSULE */}
+//         <div className="bg-[#ececf0] px-5 py-5 rounded-full flex items-center gap-3">
+//           {providedFeatures.map((_, idx) => (
+//             <button
+//               key={idx}
+//               onClick={() => setActiveIndex(idx)}
+//               aria-label={`Go to slide ${idx + 1}`}
+//               className={`
+//                 transition-all
+//                 duration-300
+//                 ease-out
+//                 cursor-pointer
+//                 ${
+//                   activeIndex === idx
+//                     ? "w-7 h-1.5 rounded-full bg-[#636366]"
+//                     : "w-1.5 h-1.5 rounded-full bg-[#8e8e93] hover:bg-[#636366]"
+//                 }
+//               `}
+//             />
+//           ))}
+//         </div>
+
+//         {/* PLAY / PAUSE BUTTON */}
+//         <button
+//           onClick={togglePlay}
+//           aria-label={isPlaying ? "Pause autoplay" : "Start autoplay"}
+//           className="
+//             w-10
+//             h-10
+//             rounded-full
+//             bg-[#ececf0]
+//             hover:bg-[#e4e4e9]
+//             flex
+//             items-center
+//             justify-center
+//             text-[#1d1d1f]
+//             transition-all
+//             duration-200
+//             cursor-pointer
+//           "
+//         >
+//           {isPlaying ? (
+//             <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+//               <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+//             </svg>
+//           ) : (
+//             <svg
+//               className="w-3.5 h-3.5 fill-current ml-0.5"
+//               viewBox="0 0 24 24"
+//             >
+//               <path d="M8 5v14l11-7z" />
+//             </svg>
+//           )}
+//         </button>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default ProvidedFeatures;
