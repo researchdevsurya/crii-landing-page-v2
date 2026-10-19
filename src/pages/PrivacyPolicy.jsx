@@ -32,21 +32,21 @@ export default function PrivacyPolicy() {
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
-            "itemListElement": [
+            itemListElement: [
               {
                 "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://www.careerreadyindia.com"
+                position: 1,
+                name: "Home",
+                item: "https://www.careerreadyindia.com",
               },
               {
                 "@type": "ListItem",
-                "position": 2,
-                "name": "Privacy Policy",
-                "item": "https://www.careerreadyindia.com/privacy"
-              }
-            ]
-          }
+                position: 2,
+                name: "Privacy Policy",
+                item: "https://www.careerreadyindia.com/privacy",
+              },
+            ],
+          },
         ]}
       />
       {/* Decorative background glows */}
@@ -389,7 +389,9 @@ export default function PrivacyPolicy() {
                 following the alterations.
               </p>
               <div className="border-t border-slate-100 pt-6">
-                <p className="font-medium text-slate-700">The Education Match</p>
+                <p className="font-medium text-slate-700">
+                  The Education Match
+                </p>
                 <p className="text-xs text-slate-400 font-medium mt-1">
                   Simplifying the toughest decision in every student's life.
                 </p>

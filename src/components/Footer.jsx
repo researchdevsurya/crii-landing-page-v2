@@ -23,9 +23,7 @@ export default function Footer() {
     termsUrl = `/terms?${paramStr}`;
   }
   return (
-    <footer
-      className="relative bg-[#161617] pt-20 pb-10 overflow-hidden mt-auto"
-    >
+    <footer className="relative bg-[#161617] pt-20 pb-10 overflow-hidden mt-auto">
       {/* Decorative background glows */}
       {/* <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" /> */}
       {/* <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" /> */}
@@ -37,8 +35,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16">
           {/* Brand & About (Takes more space) */}
           <div className="md:col-span-5 lg:col-span-4">
-            <Link to={homeUrl} className="inline-flex items-center gap-4 mb-6 group">
-              <CRILoaderIcon className="h-20 w-auto opacity-90 group-hover:opacity-100 transition-opacity" dark={true} />
+            <Link
+              to={homeUrl}
+              className="inline-flex items-center gap-4 mb-6 group"
+            >
+              <CRILoaderIcon
+                className="h-20 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                dark={true}
+              />
               <div className="flex flex-col">
                 <span className="text-xl font-semibold text-white tracking-tight leading-tight group-hover:text-blue-400 transition-colors">
                   Career Ready India

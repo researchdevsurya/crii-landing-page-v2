@@ -101,6 +101,10 @@ export default function AudienceSection() {
                 leading-[0.92]
                 tracking-[-0.035em]
                 text-[#1E1E1E]
+                mt-12 md:mt-32
+
+                max-[450px]:text-[40px]
+
               "
             >
               One Programme.
@@ -113,7 +117,7 @@ export default function AudienceSection() {
               opacity: peopleOpacity,
               y: peopleY,
             }}
-            className="relative z-30 mt-1 sm:mt-2 w-full text-center will-change-transform"
+            className="relative z-30 pt-4 md:pt-5 w-full text-center will-change-transform"
           >
             <h3
               className="
@@ -190,10 +194,12 @@ export default function AudienceSection() {
                   /* MOBILE OVERLAP (2x2 Grid with clean overlap) */
                   ${index === 0 ? "z-[1] -mr-6 xs:-mr-7" : ""}
                   ${index === 1 ? "z-[2] -ml-6 xs:-ml-7" : ""}
-                  ${index === 2 ? "z-[3] -mr-6 xs:-mr-7 -mt-14 xs:-mt-16" : ""}
-                  ${index === 3 ? "z-[4] -ml-6 xs:-ml-7 -mt-14 xs:-mt-16" : ""}
+                  ${index === 2 ? "z-[3] -mr-6 xs:-mr-7 -mt-4 xs:-mt-16" : ""}
+                  ${index === 3 ? "z-[4] -ml-6 xs:-ml-7 -mt-4 xs:-mt-16" : ""}
 
                   /* TABLET & DESKTOP SIZING (4 in a row, centered) */
+                  max-[365px]:w-[150px]
+                  max-[465px]:w-[190px]
                   sm:w-[24%]
                   sm:max-w-[210px]
                   md:max-w-[250px]
@@ -268,19 +274,23 @@ export default function AudienceSection() {
             z-30
             w-full
             text-center
-            pb-3
-            sm:pb-6
+            pb-10
+            pt-10
+            md:pb-32
             shrink-0
             will-change-transform
+
           "
         >
           <h2
             className="
-              text-[clamp(2.75rem,8.2vw,4.5rem)]
+              text-[clamp(2.75rem,8.2vw,3.8rem)]
               font-semibold
               leading-[0.92]
               tracking-[-0.035em]
               text-[#1E1E1E]
+                max-[450px]:text-[40px]
+
             "
           >
             Connected Decisions.

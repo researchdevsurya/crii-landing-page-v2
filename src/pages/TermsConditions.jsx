@@ -32,21 +32,21 @@ export default function TermsConditions() {
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
-            "itemListElement": [
+            itemListElement: [
               {
                 "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://www.careerreadyindia.com"
+                position: 1,
+                name: "Home",
+                item: "https://www.careerreadyindia.com",
               },
               {
                 "@type": "ListItem",
-                "position": 2,
-                "name": "Terms & Conditions",
-                "item": "https://www.careerreadyindia.com/terms"
-              }
-            ]
-          }
+                position: 2,
+                name: "Terms & Conditions",
+                item: "https://www.careerreadyindia.com/terms",
+              },
+            ],
+          },
         ]}
       />
       {/* Decorative background glows */}
@@ -84,44 +84,72 @@ export default function TermsConditions() {
           {/* Structured Sections */}
           <div className="space-y-8 text-slate-600 text-sm md:text-base leading-relaxed">
             <section>
-              <h2 className="text-lg font-medium text-slate-700 mb-3">1. Acceptance of Terms</h2>
+              <h2 className="text-lg font-medium text-slate-700 mb-3">
+                1. Acceptance of Terms
+              </h2>
               <p className="text-slate-500">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
               </p>
             </section>
 
             <section>
-              <h2 className="text-lg font-medium text-slate-700 mb-3">2. Description of Service</h2>
+              <h2 className="text-lg font-medium text-slate-700 mb-3">
+                2. Description of Service
+              </h2>
               <p className="text-slate-500">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.
               </p>
             </section>
 
             <section>
-              <h2 className="text-lg font-medium text-slate-700 mb-3">3. Eligibility and Onboarding</h2>
+              <h2 className="text-lg font-medium text-slate-700 mb-3">
+                3. Eligibility and Onboarding
+              </h2>
               <p className="text-slate-500">
-                Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
+                Curabitur pretium tincidunt lacus. Nulla gravida orci a odio.
+                Nullam varius, turpis et commodo pharetra, est eros bibendum
+                elit, nec luctus magna felis sollicitudin mauris. Integer in
+                mauris eu nibh euismod gravida.
               </p>
             </section>
 
             <section>
-              <h2 className="text-lg font-medium text-slate-700 mb-3">4. Intellectual Property</h2>
+              <h2 className="text-lg font-medium text-slate-700 mb-3">
+                4. Intellectual Property
+              </h2>
               <p className="text-slate-500">
-                Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis.
+                Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros,
+                ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed
+                lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo
+                pellentesque facilisis.
               </p>
             </section>
 
             <section>
-              <h2 className="text-lg font-medium text-slate-700 mb-3">5. Limitation of Liability</h2>
+              <h2 className="text-lg font-medium text-slate-700 mb-3">
+                5. Limitation of Liability
+              </h2>
               <p className="text-slate-500">
-                Praesent congue erat at massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem.
+                Praesent congue erat at massa. Pellentesque habitant morbi
+                tristique senectus et netus et malesuada fames ac turpis
+                egestas. Mauris ut leo. Cras viverra metus rhoncus sem.
               </p>
             </section>
 
             <section>
-              <h2 className="text-lg font-medium text-slate-700 mb-3">6. Governing Law</h2>
+              <h2 className="text-lg font-medium text-slate-700 mb-3">
+                6. Governing Law
+              </h2>
               <p className="text-slate-500">
-                These Terms and Conditions shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions.
+                These Terms and Conditions shall be governed by and construed in
+                accordance with the laws of India, without regard to its
+                conflict of law provisions.
               </p>
             </section>
           </div>

@@ -581,21 +581,35 @@ const CareerReadyFeatures = () => {
             <div
               className="
                 sticky
-                bottom-4
-                sm:bottom-6
+                bottom-0
                 z-20
 
                 pointer-events-none
 
-                bg-white/95
-                backdrop-blur-md
+                bg-white
 
                 pt-3
-                pb-4
-
-                rounded-t-2xl
+                pb-3
+                sm:pb-5
               "
             >
+              {/* Soft opacity gradient fade overlay above the phone so text dissolves seamlessly into the white background */}
+              <div
+                aria-hidden="true"
+                className="
+                  absolute
+                  -top-16
+                  sm:-top-20
+                  inset-x-0
+                  h-16
+                  sm:h-20
+                  bg-gradient-to-t
+                  from-white
+                  via-white/85
+                  to-transparent
+                  pointer-events-none
+                "
+              />
               <div
                 className="
                   relative

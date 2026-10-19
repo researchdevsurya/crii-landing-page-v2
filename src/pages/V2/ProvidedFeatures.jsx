@@ -99,8 +99,8 @@ export const CardOverlayText = ({
   my, // e.g. "my-4", "4"
   style = {},
   className = "",
-  titleClassName = "font-semibold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-[#1d1d1f]",
-  descClassName = "font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-[#1d1d1f]/80",
+  titleClassName = "font-semibold max-[365px]:text-xs text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-[#1d1d1f]",
+  descClassName = "font-medium max-[365px]:text-xs max-[365px]:leading-none text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl text-[#1d1d1f]/80",
 }) => {
   const alignClass =
     align === "left" || align === "semileft" || align === "semi-left"
@@ -360,7 +360,7 @@ export const CardOverlayText = ({
           ${className}
         `}
       >
-        <h3 className="leading-snug tracking-tight">
+        <h3 className="leading-snug     tracking-tight">
           <span className={titleClassName}>{title} </span>
           {description && <span className={descClassName}>{description}</span>}
         </h3>

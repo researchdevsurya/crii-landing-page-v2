@@ -89,12 +89,13 @@ export default function ZeroCostSection() {
           {/* =========================
               CENTERED HEADING (ANIMATED)
           ========================== */}
-          <div className="mx-auto max-w-[1800px] text-center mb-4 xs:mb-6 sm:mb-8">
+          <div className="mx-auto mt-8 md:mt-0 max-w-[1800px] text-center mb-4 xs:mb-6 sm:mb-8">
             <h1
               className="
                 m-0
                 font-extrabold
                 tracking-[-0.045em]
+                max-[365px]:text-[40px]
                 text-6xl
                 sm:text-7xl
                 lg:text-8xl

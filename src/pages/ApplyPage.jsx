@@ -76,10 +76,11 @@ function Input({ id, type = "text", placeholder, required, error, ...rest }) {
         type={type}
         placeholder={placeholder}
         required={required}
-        className={`w-full bg-slate-50/50 border rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200 shad-sm ${error
-          ? "border-rose-300 focus:ring-rose-200"
-          : "border-slate-200 focus:border-blue-400 focus:ring-blue-100"
-          }`}
+        className={`w-full bg-slate-50/50 border rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200 shad-sm ${
+          error
+            ? "border-rose-300 focus:ring-rose-200"
+            : "border-slate-200 focus:border-blue-400 focus:ring-blue-100"
+        }`}
         {...rest}
       />
       {error && (
@@ -117,10 +118,11 @@ function Textarea({ id, placeholder, required, rows = 4, error, ...rest }) {
         placeholder={placeholder}
         required={required}
         rows={rows}
-        className={`w-full bg-slate-50/50 border rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200 shad-sm resize-y ${error
-          ? "border-rose-300 focus:ring-rose-200"
-          : "border-slate-200 focus:border-blue-400 focus:ring-blue-100"
-          }`}
+        className={`w-full bg-slate-50/50 border rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200 shad-sm resize-y ${
+          error
+            ? "border-rose-300 focus:ring-rose-200"
+            : "border-slate-200 focus:border-blue-400 focus:ring-blue-100"
+        }`}
         {...rest}
       />
       {error && (
@@ -181,9 +183,7 @@ function SectionHeading({ icon: Icon, title, description }) {
         <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 shad-inner">
           <Icon size={20} className="text-blue-600" />
         </div>
-        <h3 className="text-xl font-medium text-slate-600">
-          {title}
-        </h3>
+        <h3 className="text-xl font-medium text-slate-600">{title}</h3>
       </div>
       {description && (
         <p className="mt-2 text-sm text-slate-500 leading-relaxed ml-[54px]">
@@ -251,10 +251,11 @@ function SearchableSelect({
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          className={`w-full bg-slate-50/50 border rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200 shad-sm ${error
-            ? "border-rose-300 focus:ring-rose-200"
-            : "border-slate-200 focus:border-blue-400 focus:ring-blue-100"
-            }`}
+          className={`w-full bg-slate-50/50 border rounded-xl px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 transition-all duration-200 shad-sm ${
+            error
+              ? "border-rose-300 focus:ring-rose-200"
+              : "border-slate-200 focus:border-blue-400 focus:ring-blue-100"
+          }`}
           disabled={loading}
           autoComplete="off"
         />
@@ -280,10 +281,11 @@ function SearchableSelect({
                   setSearchTerm(opt.name);
                   setIsOpen(false);
                 }}
-                className={`px-4 py-2.5 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors ${String(opt.id) === String(value)
-                  ? "bg-blue-50/50 text-blue-600 font-semibold"
-                  : ""
-                  }`}
+                className={`px-4 py-2.5 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors ${
+                  String(opt.id) === String(value)
+                    ? "bg-blue-50/50 text-blue-600 font-semibold"
+                    : ""
+                }`}
               >
                 {opt.name}
               </li>
@@ -517,12 +519,12 @@ export default function ApplyPage() {
               fetchedData.do_have_counsellor === null
                 ? ""
                 : fetchedData.do_have_counsellor === 1 ||
-                fetchedData.do_have_counsellor === true,
+                  fetchedData.do_have_counsellor === true,
             hasComputerLab:
               fetchedData.do_have_computer_lab === null
                 ? ""
                 : fetchedData.do_have_computer_lab === 1 ||
-                fetchedData.do_have_computer_lab === true,
+                  fetchedData.do_have_computer_lab === true,
             address: fetchedData.address || "",
             stateId: fetchedData.state_id || "",
             cityId: fetchedData.city_id || "",
@@ -598,21 +600,21 @@ export default function ApplyPage() {
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
-            "itemListElement": [
+            itemListElement: [
               {
                 "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://www.careerreadyindia.com"
+                position: 1,
+                name: "Home",
+                item: "https://www.careerreadyindia.com",
               },
               {
                 "@type": "ListItem",
-                "position": 2,
-                "name": "Apply",
-                "item": "https://www.careerreadyindia.com/apply"
-              }
-            ]
-          }
+                position: 2,
+                name: "Apply",
+                item: "https://www.careerreadyindia.com/apply",
+              },
+            ],
+          },
         ]}
       />
       {/* ══ HERO ══ */}
@@ -632,7 +634,8 @@ export default function ApplyPage() {
               Application Portal
             </span>
           </div>
-          <h1 className="
+          <h1
+            className="
             mx-auto
             text-[24px]
             sm:text-[42px]
@@ -643,18 +646,21 @@ export default function ApplyPage() {
             tracking-[-0.045em]
             leading-[1.04]
             text-slate-800 mb-6
-          ">
+          "
+          >
             Apply to Career Ready <br className="hidden md:block" /> India
             Initiative
           </h1>
-          <p className="
+          <p
+            className="
             text-base
             sm:text-lg
             md:text-xl
             leading-[1.75]
             text-slate-500
             max-w-3xl mx-auto
-          ">
+          "
+          >
             Bring a complete career readiness programme to your school. Selected
             schools receive access to The Education Decision platform, unlimited
             psychometric assessments, 346 specialisation assessments,
@@ -677,7 +683,8 @@ export default function ApplyPage() {
         <div className="max-w-3xl mx-auto px-5 md:px-8 relative z-10">
           {/* intro */}
           <div className="mb-12 text-center" data-aos="fade-up">
-            <h2 className="   mx-auto
+            <h2
+              className="   mx-auto
             text-[24px]
             sm:text-[42px]
             md:text-[45px]
@@ -686,15 +693,18 @@ export default function ApplyPage() {
             font-medium
             tracking-[-0.045em]
             leading-[1.04]
-            text-slate-800 mb-6">
+            text-slate-800 mb-6"
+            >
               Tell us about your school
             </h2>
-            <p className="     text-base
+            <p
+              className="     text-base
             sm:text-lg
             md:text-xl
             leading-[1.75]
             text-slate-500
-            max-w-3xl mx-auto">
+            max-w-3xl mx-auto"
+            >
               Complete the application below to help us understand your school,
               its students and its readiness to implement Career Ready India
               Initiative. Applications should be submitted by an authorised
@@ -747,7 +757,7 @@ export default function ApplyPage() {
                     onBlur={formik.handleBlur}
                     error={
                       formik.touched.counsellorName &&
-                        formik.errors.counsellorName
+                      formik.errors.counsellorName
                         ? formik.errors.counsellorName
                         : null
                     }

@@ -79,7 +79,7 @@ export const DELIVERABLES = [
     accentLight: "#f5f3ff",
     accentBorder: "#ddd6fe",
     gradient: "linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%)",
-    image: d2Img
+    image: d2Img,
   },
   {
     id: "specialisation",
@@ -103,7 +103,7 @@ export const DELIVERABLES = [
     accentLight: "#fff1f2",
     accentBorder: "#fecdd3",
     gradient: "linear-gradient(135deg, #e11d48 0%, #f43f5e 100%)",
-    image: d3Img
+    image: d3Img,
   },
   {
     id: "training",
@@ -130,7 +130,7 @@ export const DELIVERABLES = [
     accentLight: "#ecfdf5",
     accentBorder: "#a7f3d0",
     gradient: "linear-gradient(135deg, #059669 0%, #10b981 100%)",
-    image: d4Img
+    image: d4Img,
   },
   {
     id: "counselling",
@@ -155,7 +155,7 @@ export const DELIVERABLES = [
     accentLight: "#fffbeb",
     accentBorder: "#fde68a",
     gradient: "linear-gradient(135deg, #d97706 0%, #f59e0b 100%)",
-    image: d5Img
+    image: d5Img,
   },
   {
     id: "application",
@@ -182,7 +182,7 @@ export const DELIVERABLES = [
     accentLight: "#ecfeff",
     accentBorder: "#a5f3fc",
     gradient: "linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)",
-    image: d6Img
+    image: d6Img,
   },
   {
     id: "resources",
@@ -202,7 +202,7 @@ export const DELIVERABLES = [
     accentLight: "#eef2ff",
     accentBorder: "#c7d2fe",
     gradient: "linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)",
-    image: d7Img
+    image: d7Img,
   },
 ];
 
@@ -219,14 +219,17 @@ function DeliverableItem({ item, index }) {
     >
       <div className="max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
-
           {/* ═══════════════ TEXT CONTENT ═══════════════ */}
           <div
-            className={`flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-16 pt-16 pb-8 lg:py-28 ${isReversed ? "lg:order-2" : "lg:order-1"
-              }`}
+            className={`flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-16 pt-16 pb-8 lg:py-28 ${
+              isReversed ? "lg:order-2" : "lg:order-1"
+            }`}
           >
             {/* ── Badge ── */}
-            <div data-aos="fade-up" className="inline-flex items-center gap-3 mb-8 self-start">
+            <div
+              data-aos="fade-up"
+              className="inline-flex items-center gap-3 mb-8 self-start"
+            >
               {/* <span
                 className="flex items-center justify-center w-9 h-9 rounded-full text-white text-[12px] font-bold shadow-md"
                 style={{ background: item.gradient }}
@@ -242,7 +245,11 @@ function DeliverableItem({ item, index }) {
             </div>
 
             {/* ── Heading ── */}
-            <h2 data-aos="fade-up" data-aos-delay="100" className="text-[2.25rem] md:text-[2.75rem] lg:text-[3rem] font-semibold text-slate-900 leading-[1.12] tracking-tight mb-6">
+            <h2
+              data-aos="fade-up"
+              data-aos-delay="100"
+              className="text-[2.25rem] md:text-[2.75rem] lg:text-[3rem] font-semibold text-slate-900 leading-[1.12] tracking-tight mb-6"
+            >
               {item.heading}{" "}
               <span className="relative " style={{ color: item.accent }}>
                 {item.highlightText}
@@ -265,7 +272,11 @@ function DeliverableItem({ item, index }) {
             </h2>
 
             {/* ── Description ── */}
-            <p data-aos="fade-up" data-aos-delay="200" className="text-[16px] md:text-[17px] text-slate-500 leading-[1.75] mb-8 max-w-lg">
+            <p
+              data-aos="fade-up"
+              data-aos-delay="200"
+              className="text-[16px] md:text-[17px] text-slate-500 leading-[1.75] mb-8 max-w-lg"
+            >
               {item.description}
             </p>
 
@@ -273,14 +284,23 @@ function DeliverableItem({ item, index }) {
             {item.bullets.length > 0 && (
               <div className="mb-8">
                 {item.lead && (
-                  <p data-aos="fade-up" data-aos-delay="250" className="text-[15px] font-medium text-slate-800 mb-5">
+                  <p
+                    data-aos="fade-up"
+                    data-aos-delay="250"
+                    className="text-[15px] font-medium text-slate-800 mb-5"
+                  >
                     {item.lead}
                   </p>
                 )}
 
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3.5 gap-x-8">
                   {item.bullets.map((bullet, i) => (
-                    <li key={i} data-aos="fade-up" data-aos-delay={300 + i * 50} className="flex items-center gap-3">
+                    <li
+                      key={i}
+                      data-aos="fade-up"
+                      data-aos-delay={300 + i * 50}
+                      className="flex items-center gap-3"
+                    >
                       <span
                         className="flex items-center justify-center w-5 h-5 rounded-full shrink-0"
                         style={{ backgroundColor: `${item.accent}15` }}
@@ -325,8 +345,9 @@ function DeliverableItem({ item, index }) {
 
           {/* ═══════════════ IMAGE ═══════════════ */}
           <div
-            className={`relative flex items-center justify-center overflow-hidden group ${isReversed ? "lg:order-1" : "lg:order-2"
-              }`}
+            className={`relative flex items-center justify-center overflow-hidden group ${
+              isReversed ? "lg:order-1" : "lg:order-2"
+            }`}
             data-aos="zoom-in-up"
             data-aos-duration="1000"
             data-aos-delay="150"
@@ -337,12 +358,13 @@ function DeliverableItem({ item, index }) {
               loading="lazy"
               className="relative w-full h-full object-cover lg:object-contain max-h-[550px] px-6 pb-12 pt-0 lg:p-6 transition-transform duration-1000 group-hover:scale-105"
               style={{
-                maskImage: "radial-gradient(ellipse 75% 70% at center, black 50%, transparent 100%)",
-                WebkitMaskImage: "radial-gradient(ellipse 75% 70% at center, black 50%, transparent 100%)",
+                maskImage:
+                  "radial-gradient(ellipse 75% 70% at center, black 50%, transparent 100%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 75% 70% at center, black 50%, transparent 100%)",
               }}
             />
           </div>
-
         </div>
       </div>
 

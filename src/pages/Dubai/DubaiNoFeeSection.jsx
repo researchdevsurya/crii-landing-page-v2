@@ -16,7 +16,8 @@ const NoFeeSection = ({ applyUrl = "/apply" }) => {
         data-aos="fade-up"
       >
         {/* Heading */}
-        <h2 className="  text-[24px]
+        <h2
+          className="  text-[24px]
         sm:text-[42px]
         md:text-[45px]
         lg:text-[48px]
@@ -24,7 +25,8 @@ const NoFeeSection = ({ applyUrl = "/apply" }) => {
         font-medium
         tracking-[-0.045em]
         leading-[1.04]
-        text-slate-800">
+        text-slate-800"
+        >
           There is{" "}
           <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent font-semibold">
             no fee
@@ -33,10 +35,12 @@ const NoFeeSection = ({ applyUrl = "/apply" }) => {
         </h2>
 
         {/* Main Description */}
-        <p className="  text-base pt-5 pb-7
+        <p
+          className="  text-base pt-5 pb-7
           sm:text-lg
           md:text-xl
-          text-slate-500">
+          text-slate-500"
+        >
           Schools will be onboarded following a review of their application, and
           selected schools will receive the complete programme at no cost.
           Schools that are not selected will not be charged or enrolled.

@@ -349,7 +349,7 @@ export default function StudentPathwaysHero() {
     "text-[clamp(3.2rem,8.5vw,9.5rem)] font-semibold tracking-[-0.045em] leading-[0.92] text-white";
 
   const wordEyebrow =
-    "text-sm sm:text-lg md:text-xl font-medium uppercase tracking-[0.2em] text-white/85 mb-1 sm:mb-2";
+    "text-sm sm:text-lg md:text-xl font-medium uppercase  text-white/85 mb-1 sm:mb-2";
 
   return (
     <section
@@ -411,7 +411,7 @@ export default function StudentPathwaysHero() {
           className="absolute left-1/2 top-[7%] z-20 w-full max-w-[1600px] px-4 sm:px-8 lg:px-12 text-center will-change-[transform,opacity] md:top-[8%]"
           style={{ transform: "translate3d(-50%,0,0)" }}
         >
-          <p className="text-sm font-semibold text-white sm:text-base md:text-4xl tracking-[-0.01em]">
+          <p className="text-sm mt-8 md:mt-0 font-semibold text-white sm:text-base md:text-4xl tracking-[-0.01em]">
             Students today have
           </p>
           <h1 className="mt-2 text-[clamp(2.75rem,7.5vw,7.5rem)] font-semibold leading-[0.94] tracking-[-0.04em] text-white">
@@ -441,12 +441,13 @@ export default function StudentPathwaysHero() {
           }}
         >
           <div className="mx-auto max-w-9xl">
-            <p className="mb-2 sm:mb-4 text-xs xs:text-sm sm:text-base md:text-2xl mt-5 font-light tracking-[-0.01em] text-gray-800">
+            <p className="mb-2 mt-8 md:mt-0 sm:mb-4 text-xs xs:text-sm sm:text-base md:text-2xl mt-5 font-light tracking-[-0.01em] text-gray-800">
               What is Career Ready India
             </p>
             <h2
               className="
-                text-[40px]
+              max-[365px]:text-[30px]
+                text-[42px]
                 sm:text-[40px]
                 md:text-[50px]
                 lg:text-[60px]

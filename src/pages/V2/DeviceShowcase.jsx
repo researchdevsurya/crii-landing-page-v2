@@ -123,7 +123,7 @@ const DeviceShowcase = () => {
             ================================================= */}
       <section
         ref={sectionRef}
-        className="relative z-40 hidden bg-white md:block h-[300vh]"
+        className="relative  z-40 hidden bg-white md:block h-[300vh]"
       >
         {/* =================================================
                     STICKY VIEWPORT
@@ -162,6 +162,7 @@ const DeviceShowcase = () => {
                             sm:top-[4%]
                             inset-x-0
                             z-40
+                            mt-12
                             mx-auto
                             max-w-4xl
                             px-6
@@ -361,4 +362,3 @@ const DeviceShowcase = () => {
 };
 
 export default DeviceShowcase;
-

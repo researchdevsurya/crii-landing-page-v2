@@ -32,8 +32,6 @@ import SEO from "../components/SEO";
 import TheProblems from "./TheProblems";
 import Deliverables from "./Deliverables";
 
-
-
 export default function HomePage() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -85,7 +83,6 @@ export default function HomePage() {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-32 sm:pt-36 md:pt-44 lg:pt-40 pb-20 sm:pb-16">
           <div className="w-full lg:w-[65%] xl:w-[65%]">
             {/* Badge */}
-
 
             {/* Headline */}
             <h1
@@ -227,7 +224,6 @@ export default function HomePage() {
       <Deliverables />
       {/* ════════════════ FINAL CTA ════════════════ */}
       <section className="relative py-28 md:py-36 bg-white overflow-hidden">
-
         <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
 
         {/* Decorative elements */}
@@ -240,7 +236,6 @@ export default function HomePage() {
             data-aos="fade-up"
           >
             {/* Top accent line */}
-
 
             <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
               {/* Badge */}

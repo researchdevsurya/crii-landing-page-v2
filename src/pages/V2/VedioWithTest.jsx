@@ -274,7 +274,7 @@ export default function CareerReadinessExperience({ bgVideo }) {
               </div>
 
               {/* Title */}
-              <h2 className="mx-auto max-w-7xl text-[clamp(2.85rem,8vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.035em] text-white">
+              <h2 className="mx-auto max-[365px]:text-[40px]   max-w-7xl text-[clamp(2.85rem,8vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.035em] text-white">
                 {scene.title}
               </h2>
 

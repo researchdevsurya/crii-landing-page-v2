@@ -10,8 +10,7 @@ const capabilities = [
     desc: "Every student gets a structured self-assessment, mapped to real education and career paths, before any college conversation begins.",
     imageold:
       "https://crii-live.s3.ap-south-1.amazonaws.com/crii_website_img/c1.png",
-    image:
-      "https://crii-live.s3.ap-south-1.amazonaws.com/cri/top1.png",
+    image: "https://crii-live.s3.ap-south-1.amazonaws.com/cri/top1.png",
     color: "blue",
     icon: (
       <svg
@@ -37,8 +36,7 @@ const capabilities = [
     desc: "Unlimited student assessments and learning resources, live under a single school login — nothing to re-issue every term.",
     imageold:
       "https://crii-live.s3.ap-south-1.amazonaws.com/crii_website_img/c2.png",
-    image:
-      "https://crii-live.s3.ap-south-1.amazonaws.com/cri/top2.png",
+    image: "https://crii-live.s3.ap-south-1.amazonaws.com/cri/top2.png",
     color: "orange",
     icon: (
       <svg
@@ -64,8 +62,7 @@ const capabilities = [
     desc: "Your counselling staff complete formal training and get ongoing professional support, not a one-time workshop.",
     imageold:
       "https://crii-live.s3.ap-south-1.amazonaws.com/crii_website_img/c322.png",
-    image:
-      "https://crii-live.s3.ap-south-1.amazonaws.com/cri/top3.png",
+    image: "https://crii-live.s3.ap-south-1.amazonaws.com/cri/top3.png",
     color: "green",
     icon: (
       <svg
@@ -91,8 +88,7 @@ const capabilities = [
     desc: "Dedicated support carries students from self-discovery through to submitted college applications.",
     imageold:
       "https://crii-live.s3.ap-south-1.amazonaws.com/crii_website_img/c42.jpg",
-    image:
-      "https://crii-live.s3.ap-south-1.amazonaws.com/cri/top4.png",
+    image: "https://crii-live.s3.ap-south-1.amazonaws.com/cri/top4.png",
     color: "purple",
     icon: (
       <svg
@@ -185,7 +181,10 @@ function ParallaxImage({ src, alt }) {
   }, []);
 
   return (
-    <div ref={wrapperRef} className="absolute inset-0 overflow-hidden rounded-[inherit]">
+    <div
+      ref={wrapperRef}
+      className="absolute inset-0 overflow-hidden rounded-[inherit]"
+    >
       <img
         ref={imageRef}
         src={src}
@@ -223,9 +222,8 @@ export default function ProgrammeIntro() {
             HEADER
         ========================================================= */}
         <div data-aos="fade-up" className="max-w-3xl mx-auto text-center mb-20">
-
-
-          <h2 className="   mx-auto
+          <h2
+            className="   mx-auto
         text-[24px]
         sm:text-[42px]
         md:text-[45px]
@@ -234,20 +232,25 @@ export default function ProgrammeIntro() {
         font-medium
         tracking-[-0.045em]
         leading-[1.04]
-        text-slate-800 mb-6">
+        text-slate-800 mb-6"
+          >
             A stronger support system <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-600 via-blue-700 to-blue-800">
               for every student
             </span>
           </h2>
 
-          <p className="  text-base
+          <p
+            className="  text-base
           sm:text-lg
           md:text-xl
           lg:text-[21px]
           leading-[1.75]
-          text-slate-500">
-            Career Ready India equips schools with everything they need to make every student career ready — a capability that stays in the building.
+          text-slate-500"
+          >
+            Career Ready India equips schools with everything they need to make
+            every student career ready — a capability that stays in the
+            building.
           </p>
         </div>
 
@@ -274,17 +277,13 @@ export default function ProgrammeIntro() {
               >
                 {/* Image Header Area */}
                 <div className="relative h-60 w-full p-4 pb-0">
-                  <div className={`absolute inset-0 ${t.glow} opacity-10 blur-2xl transition-opacity duration-500 group-hover:opacity-20`} />
+                  <div
+                    className={`absolute inset-0 ${t.glow} opacity-10 blur-2xl transition-opacity duration-500 group-hover:opacity-20`}
+                  />
 
                   <div className="relative h-full w-full rounded-2xl overflow-hidden shadow-inner bg-white">
                     <ParallaxImage src={cap.image} alt={cap.title} />
-
-
-
-
                   </div>
-
-
                 </div>
 
                 {/* Content Area */}
@@ -298,7 +297,9 @@ export default function ProgrammeIntro() {
                   </p>
 
                   <div className="mt-auto pt-8">
-                    <div className={`h-1 w-10 rounded-full ${t.bg} opacity-50 transition-all duration-500 group-hover:w-20 group-hover:opacity-100`} />
+                    <div
+                      className={`h-1 w-10 rounded-full ${t.bg} opacity-50 transition-all duration-500 group-hover:w-20 group-hover:opacity-100`}
+                    />
                   </div>
                 </div>
               </article>
@@ -309,10 +310,15 @@ export default function ProgrammeIntro() {
         {/* =========================================================
             FOOTER
         ========================================================= */}
-        <div data-aos="fade-in" data-aos-delay="600" className="mt-20 flex items-center justify-center gap-6">
+        <div
+          data-aos="fade-in"
+          data-aos-delay="600"
+          className="mt-20 flex items-center justify-center gap-6"
+        >
           <div className="h-px w-24 bg-gradient-to-r from-transparent to-slate-300" />
           <p className="text-[12px] font-semibold text-blue-500">
-            Better Schools <span className="mx-2 text-blue-500">✦</span> Brighter Futures
+            Better Schools <span className="mx-2 text-blue-500">✦</span>{" "}
+            Brighter Futures
           </p>
           <div className="h-px w-24 bg-gradient-to-l from-transparent to-slate-300" />
         </div>
