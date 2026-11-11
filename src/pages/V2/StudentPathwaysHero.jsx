@@ -9,35 +9,35 @@ import pathwayVideo from "../../assets/New/pathway_vedio.mp4";
 const DAMPING = 12;
 
 // Scroll length of the section (in viewport heights)
-const SCROLL_LENGTH_VH = 250;
+const SCROLL_LENGTH_VH = 380;
 
 // Word blocks with staggered sequential timing (Pathways comes late in initial sequence)
 const WORDS = [
   {
     label: "Courses.",
-    start: 0.1,
-    exit: 0.28,
+    start: 0.08,
+    exit: 0.22,
     pos: "left-[4%] top-[28%] sm:left-[6%] md:left-[8%] lg:left-[10%] sm:top-[30%]",
     align: "text-left",
   },
   {
     label: "Careers.",
-    start: 0.18,
-    exit: 0.36,
+    start: 0.16,
+    exit: 0.3,
     pos: "right-[4%] top-[48%] sm:right-[6%] md:right-[8%] lg:right-[10%] sm:top-[50%]",
     align: "text-right",
   },
   {
     label: "Colleges.",
-    start: 0.32,
-    exit: 0.48,
+    start: 0.26,
+    exit: 0.4,
     pos: "left-[4%] top-[28%] sm:left-[6%] md:left-[8%] lg:left-[10%] sm:top-[30%]",
     align: "text-left",
   },
   {
     label: "Pathways.",
-    start: 0.44,
-    exit: 0.58,
+    start: 0.36,
+    exit: 0.5,
     pos: "right-[4%] top-[48%] sm:right-[6%] md:right-[8%] lg:right-[10%] sm:top-[50%]",
     align: "text-right",
   },
@@ -68,7 +68,9 @@ export default function StudentPathwaysHero() {
   const videoRef = useRef(null);
   const whiteBgRef = useRef(null);
   const blendOverlayRef = useRef(null);
-  const finalOverlayRef = useRef(null);
+  const pureWhiteBgRef = useRef(null);
+  const finalTitleRef = useRef(null);
+  const finalContentRef = useRef(null);
 
   const openingRef = useRef(null);
   const wordRefs = useRef([]);
@@ -129,8 +131,13 @@ export default function StudentPathwaysHero() {
     const d = v.duration;
     if (!Number.isFinite(d) || d <= 0) return;
 
+    // strictly enforce paused state so video never plays on its own
+    if (!v.paused) {
+      v.pause();
+    }
+
     // stay slightly before the last frame so it never "ends"
-    const t = Math.min(wantTime.current, d - 0.04);
+    const t = Math.min(Math.max(0, wantTime.current), d - 0.04);
 
     if (v.seeking) return;
 
@@ -169,33 +176,56 @@ export default function StudentPathwaysHero() {
       });
 
       // White background transition
-      const whiteProgress = smooth(0.56, 0.72, p);
+      const whiteProgress = smooth(0.46, 0.58, p);
       if (whiteBgRef.current) {
         whiteBgRef.current.style.opacity = String(whiteProgress);
       }
 
-      // Blend overlay (seamless top gradient feather into white)
-      if (blendOverlayRef.current) {
-        blendOverlayRef.current.style.opacity = String(whiteProgress);
-      }
+      // Video translation to bottom & fade-out before paragraph appears
+      const vidFadeOut = smooth(0.76, 0.84, p);
+      const vidOpacity = 1 - vidFadeOut;
 
-      // Video translation to bottom (full bleed width, seamless blending)
       if (videoWrapperRef.current) {
-        const vidShift = smooth(0.58, 0.78, p);
+        const vidShift = smooth(0.46, 0.6, p);
         const isMobile =
           typeof window !== "undefined" && window.innerWidth < 768;
         const translateY = vidShift * (isMobile ? 8 : 22); // moves down only 8vh on mobile to eliminate bottom white gap
         const scale = isMobile ? 1.1 : 1.02;
 
+        videoWrapperRef.current.style.opacity = String(vidOpacity);
         videoWrapperRef.current.style.transform = `translate3d(0, ${translateY}vh, 0) scale(${scale})`;
       }
 
-      // Final Ecosystem Overlay Text: "Career Ready India is a complete career..."
-      if (finalOverlayRef.current) {
-        const finalInn = smooth(0.66, 0.82, p);
-        finalOverlayRef.current.style.opacity = String(finalInn);
-        finalOverlayRef.current.style.transform = `translate3d(-50%, ${
-          (1 - finalInn) * 30
+      // Blend overlay (seamless top gradient feather into white)
+      if (blendOverlayRef.current) {
+        blendOverlayRef.current.style.opacity = String(
+          whiteProgress * vidOpacity,
+        );
+      }
+
+      // Pure solid white cover above video (ensures pure white background for paragraph)
+      if (pureWhiteBgRef.current) {
+        const pureWhite = smooth(0.76, 0.84, p);
+        pureWhiteBgRef.current.style.opacity = String(pureWhite);
+      }
+
+      // 1. "WHAT IS CAREER READY INDIA" (appears smoothly, stays comfortably readable, then exits gently on scroll)
+      if (finalTitleRef.current) {
+        const titleInn = smooth(0.52, 0.6, p);
+        const titleOut = smooth(0.76, 0.84, p);
+        const titleOpacity = titleInn * (1 - titleOut);
+        finalTitleRef.current.style.opacity = String(titleOpacity);
+        finalTitleRef.current.style.transform = `translate3d(0, ${
+          (1 - titleInn) * 25 - titleOut * 25
+        }px, 0)`;
+      }
+
+      // 2. Content Paragraphs in pure white bg (vertically centered, reveals after video & title fully go away)
+      if (finalContentRef.current) {
+        const contentInn = smooth(0.84, 0.92, p);
+        finalContentRef.current.style.opacity = String(contentInn);
+        finalContentRef.current.style.transform = `translate3d(0, ${
+          (1 - contentInn) * 25
         }px, 0)`;
       }
 
@@ -240,6 +270,11 @@ export default function StudentPathwaysHero() {
         raf.current = requestAnimationFrame(tick);
       } else {
         running.current = false;
+        // Fail-safe: ensure video is strictly paused when scroll motion settles
+        const v = videoRef.current;
+        if (v && !v.paused) {
+          v.pause();
+        }
       }
     },
     [render],
@@ -314,24 +349,18 @@ export default function StudentPathwaysHero() {
     if (!Number.isFinite(v.duration) || v.duration <= 0) return;
 
     readyRef.current = true;
-
-    const unlock = v.play();
-    if (unlock && typeof unlock.then === "function") {
-      unlock
-        .then(() => v.pause())
-        .catch(() => {})
-        .finally(() => {
-          render(current.current);
-          setReady(true);
-        });
-    } else {
-      v.pause();
-      render(current.current);
-      setReady(true);
-    }
+    v.pause();
+    setReady(true);
+    render(current.current);
   };
 
-  const handleSeeked = () => applyVideo();
+  const handleSeeked = () => {
+    const v = videoRef.current;
+    if (v && !v.paused) {
+      v.pause();
+    }
+    applyVideo();
+  };
 
   const handleError = () => {
     console.error("Failed to load pathway video:", pathwayVideo);
@@ -348,8 +377,9 @@ export default function StudentPathwaysHero() {
   const wordTitle =
     "text-[clamp(3.2rem,8.5vw,9.5rem)] font-semibold tracking-[-0.045em] leading-[0.92] text-white";
 
+  // const wordEyebrow =    "text-sm sm:text-lg md:text-xl font-medium uppercase  text-white/85 mb-1 sm:mb-2";
   const wordEyebrow =
-    "text-sm sm:text-lg md:text-xl font-medium uppercase  text-white/85 mb-1 sm:mb-2";
+    "text-[clamp(3.2rem,8.5vw,9.5rem)] font-semibold tracking-[-0.045em] leading-[0.92] text-white";
 
   return (
     <section
@@ -373,8 +403,8 @@ export default function StudentPathwaysHero() {
         {/* VIDEO CONTAINER (full-bleed, moves to bottom without harsh box edges) */}
         <div
           ref={videoWrapperRef}
-          className="pointer-events-none absolute inset-0 z-15 h-full w-full overflow-hidden will-change-transform"
-          style={{ transform: "translate3d(0, 0, 0) scale(1)" }}
+          className="pointer-events-none absolute inset-0 z-15 h-full w-full overflow-hidden will-change-[transform,opacity]"
+          style={{ transform: "translate3d(0, 0, 0) scale(1)", opacity: 1 }}
         >
           {src && (
             <video
@@ -388,6 +418,7 @@ export default function StudentPathwaysHero() {
               disableRemotePlayback
               tabIndex={-1}
               aria-hidden="true"
+              onPlay={(e) => e.currentTarget.pause()}
               onLoadedMetadata={handleReady}
               onLoadedData={handleReady}
               onCanPlay={handleReady}
@@ -405,13 +436,20 @@ export default function StudentPathwaysHero() {
           style={{ opacity: 0 }}
         />
 
+        {/* PURE SOLID WHITE LAYER (completely covers video when transitioning to the paragraph) */}
+        <div
+          ref={pureWhiteBgRef}
+          className="pointer-events-none absolute inset-0 z-21 bg-white will-change-opacity"
+          style={{ opacity: 0 }}
+        />
+
         {/* OPENING HEADER */}
         <div
           ref={openingRef}
           className="absolute left-1/2 top-[7%] z-20 w-full max-w-[1600px] px-4 sm:px-8 lg:px-12 text-center will-change-[transform,opacity] md:top-[8%]"
           style={{ transform: "translate3d(-50%,0,0)" }}
         >
-          <p className="text-sm mt-8 md:mt-0 font-semibold text-white sm:text-base md:text-4xl tracking-[-0.01em]">
+          <p className="mt-20 text-[clamp(2.75rem,7.5vw,7.5rem)] font-semibold leading-[0.94] tracking-[-0.04em] text-white">
             Students today have
           </p>
           <h1 className="mt-2 text-[clamp(2.75rem,7.5vw,7.5rem)] font-semibold leading-[0.94] tracking-[-0.04em] text-white">
@@ -431,50 +469,55 @@ export default function StudentPathwaysHero() {
           </div>
         ))}
 
-        {/* FINAL OVERLAY ON WHITE BACKGROUND */}
+        {/* 1. TITLE: WHAT IS CAREER READY INDIA (appears, stays, then fully goes away on scroll) */}
         <div
-          ref={finalOverlayRef}
-          className="pointer-events-none absolute left-1/2 top-[5%] sm:top-[8%] md:top-[10%] z-25 w-full max-w-9xl px-4 xs:px-6 sm:px-10 text-center will-change-[transform,opacity]"
+          ref={finalTitleRef}
+          className="pointer-events-none absolute inset-x-0 top-[10%] sm:top-[14%] md:top-[16%] lg:top-[18%] z-25 w-full max-w-9xl mx-auto px-4 xs:px-6 sm:px-10 text-center will-change-[transform,opacity]"
           style={{
-            transform: "translate3d(-50%, 30px, 0)",
+            transform: "translate3d(0, 35px, 0)",
             opacity: 0,
           }}
         >
           <div className="mx-auto max-w-9xl">
-            <p className="text-center mb-6 mt-8 md:mt-0 sm:mb-10  text-7xl md:text-7xl lg:text-[170px] mt-5 font-bold capitalize leading-[0.9] tracking-[-0.04em] text-gray-900">
+            <h2 className="text-center text-8xl sm:text-7xl md:text-8xl lg:text-[140px] xl:text-[170px] font-bold capitalize leading-[0.9] tracking-[-0.04em] text-gray-900">
+              WHAT IS CAREER READY INDIA
+            </h2>
+          </div>
+        </div>
+
+        {/* 2. PARAGRAPHS: (pure white bg, dead center vertically & horizontally) */}
+        <div
+          ref={finalContentRef}
+          className="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center px-4 xs:px-6 sm:px-10 lg:px-16 text-center will-change-[transform,opacity]"
+          style={{
+            transform: "translate3d(0, 30px, 0)",
+            opacity: 0,
+          }}
+        >
+          <div className="mx-auto max-w-9xl w-full">
+            <p className="mb-3 text-sm sm:text-base md:text-lg font-semibold uppercase tracking-[-0.08em] text-gray-700 text-center">
               WHAT IS CAREER READY INDIA
             </p>
-            <h2
-              className="
-  
-          
-         
-          
+            <p className="mb-4 sm:mb-6 md:mb-8 font-bold text-center  text-4xl md:text-6xl lg:text-7xl leading-[1] text-gray-900">
+              Higher Education and School Partnership Initiative for Informed
+              Education Decisions
+            </p>
+            <br />
 
-              "
+            <p
+              className="font-normal text-2xl lg:text-3xl xl:text-5xl tracking-[-0.02em] font-medium leading-[1] text-center text-gray-600 normal-case
+ max-w-9xl mx-auto"
             >
-              <p className="sm:mb-4  font-normal md:-mt-5  text-center text-lg text-gray-900 md:text-3xl        leading-[1.3] ">
-                Higher Education and School Partnership Initiative for Informed
-                Education Decisions <br />
-                <br />
-              </p>
-
-              <p
-                className="sm:mb-4  font-normal md:-mt-7 text-xs text-center xs:text-sm sm:text-xl text-gray-900 md:text-xl  tracking-[-0.035em]         font-medium     leading-[1.3]
-text-center
-text-gray-600 capitalize "
-              >
-                For select schools, CRI and a consortium of leading Indian
-                private universities cover the full cost of psychometric
-                assessments, counselling, expert sessions, counsellor
-                certification, and career education through books and
-                smartboards, with zero hidden charges for schools or students.
-                <br />
-                Universities guide students from Grade 8 onwards in
-                understanding career fields, specialisations, degrees, and their
-                outcomes.
-              </p>
-            </h2>
+              For select schools, CRI and a consortium of leading Indian private
+              universities cover the full cost of psychometric assessments,
+              counselling, expert sessions, counsellor certification, and career
+              education through books and smartboards, with zero hidden charges
+              for schools or students.
+              <br />
+              <br />
+              Universities guide students from Grade 8 onwards in understanding
+              career fields, specialisations, degrees, and their outcomes.
+            </p>
           </div>
         </div>
 

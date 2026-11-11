@@ -92,9 +92,9 @@ export default function Header() {
         <div className="flex items-center">
           <button
             onClick={(e) => handleNavClick("home", e)}
-            className="text-base sm:text-lg font-semibold tracking-tight text-[#1d1d1f] hover:opacity-80 transition-opacity"
+            className="text-base sm:text-lg font-extrabold capitalize text-gray-900 hover:opacity-80 transition-opacity tracking-[-0.07em]"
           >
-            Career Ready India
+            CAREER READY INDIA
           </button>
         </div>
 
@@ -132,7 +132,7 @@ export default function Header() {
             to={applyUrl}
             className="inline-flex items-center justify-center bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs sm:text-sm font-normal px-4 py-1 sm:py-1.5 rounded-full transition-all shadow-sm active:scale-95 no-underline"
           >
-            Nominate{" "}
+            Nominate School
           </Link>
         </nav>
 

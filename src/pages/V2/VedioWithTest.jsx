@@ -17,22 +17,20 @@ export default function CareerReadinessExperience({ bgVideo }) {
   const scenes = useMemo(
     () => [
       {
-        eyebrow: "Access for All",
+        eyebrow: "",
         title: (
           <>
-            Built for every student.
+            India's first structured
             <br />
-            Available to every participating school.
+            school to university transition program
           </>
         ),
-        description:
-          "A school-wide career readiness programme designed to reach students across grades, interests and education pathways.",
+        description: "",
       },
       {
-        eyebrow: "The complete program",
+        eyebrow: "",
         title: <>Comprehensive by design.</>,
-        description:
-          "Assessment, counselling, career education, resources and decision tools, brought together without adding another cost to the school.",
+        description: "",
       },
     ],
     [],
@@ -255,7 +253,7 @@ export default function CareerReadinessExperience({ bgVideo }) {
                 inset-x-0
                 mx-auto
                 w-full
-                max-w-[1500px]
+                max-w-9xl
                 px-4
                 sm:px-8
                 text-center
@@ -274,7 +272,7 @@ export default function CareerReadinessExperience({ bgVideo }) {
               </div>
 
               {/* Title */}
-              <h2 className="mx-auto max-[365px]:text-[40px]   max-w-7xl text-[clamp(2.85rem,8vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.035em] text-white">
+              <h2 className="mx-auto max-[365px]:text-[40px]   max-w-9xl text-[clamp(2.85rem,8vw,7.5rem)] font-semibold leading-[0.92] tracking-[-0.035em] text-white">
                 {scene.title}
               </h2>
 

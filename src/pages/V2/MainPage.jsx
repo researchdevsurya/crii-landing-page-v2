@@ -122,15 +122,15 @@ const MainPage = () => {
           {/* Bottom Left: Logo + Brand Name & Slogan */}
           <div className="flex flex-col items-center lg:items-start max-w-2xl xl:max-w-4xl">
             <div className="flex items-center justify-center lg:justify-start gap-3">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-semibold tracking-tight text-slate-800 font-sans fade-in">
-                Career Ready India
+              <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-[-0.08em] text-slate-800 font-sans fade-in">
+                CAREER READY INDIA
               </h1>
             </div>
-            <p className="mt-2 text-sm sm:text-base md:text-xl xl:text-[1.55rem] text-slate-800 font-medium tracking-tight max-w-xl lg:max-w-none fade-in fade-in-delay-1">
+            <p className="mt-2 text-md md:text-xl xl:text-[1.55rem] text-slate-800 font-medium tracking-[-0.06em] max-w-full fade-in fade-in-delay-1">
               {/* Complete career and college readiness for every student. Free for
               schools. */}
-              Higher education and school partnership initiative <br />
-              India's first structured school to university transition program
+              A Higher Education and School Partnership Initiative <br />
+              {/* India's first structured school to university transition program */}
             </p>
           </div>
 
@@ -146,7 +146,7 @@ const MainPage = () => {
               to="/apply"
               className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-[#1d1d1f] hover:bg-black text-white text-sm sm:text-base font-medium tracking-tight transition-all duration-200"
             >
-              Nominate
+              Nominate School
             </Link>
           </div>
         </div>

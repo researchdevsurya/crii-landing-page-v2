@@ -93,6 +93,8 @@ export default function ZeroCostSection() {
             <h1
               className="
                 m-0
+                mt-10
+                -mb-5
                 font-extrabold
                 tracking-[-0.045em]
                 max-[365px]:text-[40px]
@@ -107,7 +109,7 @@ export default function ZeroCostSection() {
             >
               {[
                 {
-                  text: "Everything a school needs.",
+                  text: "Everything a student needs.",
                   gradient:
                     "from-[#0048FF] via-[#4338CA] via-[#7C3AED] via-[#0052FF] via-[#7C3AED] to-[#EA580C]",
                 },
@@ -132,7 +134,7 @@ export default function ZeroCostSection() {
                     pb-1
                     sm:pb-2.5
                     px-2
-                    leading-[1.12]
+                    leading-[0.9]
                     bg-gradient-to-r
                     ${line.gradient}
                     bg-clip-text
