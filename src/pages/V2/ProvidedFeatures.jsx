@@ -11,6 +11,7 @@ import providedFeature4 from "../../assets/Feature/providedFeature4.png";
 import providedFeature5 from "../../assets/Feature/providedFeature5.png";
 import providedFeature6 from "../../assets/Feature/providedFeature6.png";
 import providedFeature7 from "../../assets/Feature/providedFeature7.png";
+import providedFeature8 from "../../assets/Feature/providedFeature8.png";
 import impVedio from "../../assets/imp_vedio.mp4";
 
 /* =========================================================
@@ -890,6 +891,76 @@ export const FeatureCard7 = ({
   </FeatureCardWrapper>
 );
 
+export const FeatureCard8 = ({
+  isActive = true,
+  onClick,
+  cardRef,
+  position = "top-center",
+  align = "left",
+  top,
+  bottom,
+  left,
+  right,
+  width,
+  maxWidth,
+  pt,
+  pb,
+  pl,
+  pr,
+  px,
+  py,
+  mt,
+  mb,
+  ml,
+  mr,
+  mx,
+  my,
+  style,
+  className = "-mt-4",
+  titleClassName,
+  descClassName,
+  title = "Connect. Explore. Get Guided.",
+  description = "One universal CRI WhatsApp number for personalised AI guidance, counselling sessions, career exploration and ongoing student support.",
+  image = providedFeature8,
+}) => (
+  <FeatureCardWrapper isActive={isActive} onClick={onClick} cardRef={cardRef}>
+    <div className="absolute inset-0 h-full w-full overflow-hidden">
+      <img
+        src={image}
+        alt={title}
+        className="h-full w-full object-cover object-bottom"
+      />
+    </div>
+    <CardOverlayText
+      title={title}
+      description={description}
+      position={position}
+      align={align}
+      top={top}
+      bottom={bottom}
+      left={left}
+      right={right}
+      width={width}
+      maxWidth={maxWidth}
+      pt={pt}
+      pb={pb}
+      pl={pl}
+      pr={pr}
+      px={px}
+      py={py}
+      mt={mt}
+      mb={mb}
+      ml={ml}
+      mr={mr}
+      mx={mx}
+      my={my}
+      style={style}
+      className={className}
+      titleClassName={titleClassName}
+      descClassName={descClassName}
+    />
+  </FeatureCardWrapper>
+);
 /* =========================================================
    ALL FEATURE COMPONENTS LIST
 ========================================================= */
@@ -901,6 +972,7 @@ const featureCardComponents = [
   FeatureCard5,
   FeatureCard6,
   FeatureCard7,
+  FeatureCard8,
 ];
 
 /* =========================================================

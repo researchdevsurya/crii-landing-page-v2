@@ -441,33 +441,44 @@ export default function StudentPathwaysHero() {
           }}
         >
           <div className="mx-auto max-w-9xl">
-            <p className="mb-2 mt-8 md:mt-0 sm:mb-4 text-xs xs:text-sm sm:text-base md:text-2xl mt-5 font-light tracking-[-0.01em] text-gray-800">
-              What is Career Ready India
+            <p className="text-center mb-6 mt-8 md:mt-0 sm:mb-10  text-7xl md:text-7xl lg:text-[170px] mt-5 font-bold capitalize leading-[0.9] tracking-[-0.04em] text-gray-900">
+              WHAT IS CAREER READY INDIA
             </p>
             <h2
               className="
-              max-[365px]:text-[30px]
-                text-[42px]
-                sm:text-[40px]
-                md:text-[50px]
-                lg:text-[60px]
-                xl:text-[70px]
+  
           
-                font-light
-                leading-[1.1]
-tracking-[-0.035em]
-text-black
+         
+          
+
               "
             >
-              Career Ready India is a{" "}
-              <span className="font-bold">complete</span> career and college
-              readiness ecosystem for{" "}
-              <span className="font-bold">every student</span>, built into the
-              school and provided at <span className="font-bold">no cost</span>.
+              <p className="sm:mb-4  font-normal md:-mt-5  text-center text-lg text-gray-900 md:text-3xl        leading-[1.3] ">
+                Higher Education and School Partnership Initiative for Informed
+                Education Decisions <br />
+                <br />
+              </p>
+
+              <p
+                className="sm:mb-4  font-normal md:-mt-7 text-xs text-center xs:text-sm sm:text-xl text-gray-900 md:text-xl  tracking-[-0.035em]         font-medium     leading-[1.3]
+text-center
+text-gray-600 capitalize "
+              >
+                For select schools, CRI and a consortium of leading Indian
+                private universities cover the full cost of psychometric
+                assessments, counselling, expert sessions, counsellor
+                certification, and career education through books and
+                smartboards, with zero hidden charges for schools or students.
+                <br />
+                Universities guide students from Grade 8 onwards in
+                understanding career fields, specialisations, degrees, and their
+                outcomes.
+              </p>
             </h2>
           </div>
         </div>
 
+        <div></div>
         {/* PROGRESS BAR */}
 
         {/* LOADING */}

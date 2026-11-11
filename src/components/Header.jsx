@@ -132,7 +132,7 @@ export default function Header() {
             to={applyUrl}
             className="inline-flex items-center justify-center bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs sm:text-sm font-normal px-4 py-1 sm:py-1.5 rounded-full transition-all shadow-sm active:scale-95 no-underline"
           >
-            Apply
+            Nominate{" "}
           </Link>
         </nav>
 

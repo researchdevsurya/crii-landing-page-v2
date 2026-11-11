@@ -9,6 +9,7 @@ import sci4 from "../../assets/Feature/sci4.png";
 import sci5 from "../../assets/Feature/sci5.png";
 import sci6 from "../../assets/Feature/sci6.png";
 import sci7 from "../../assets/Feature/sci7.png";
+import sci8 from "../../assets/Feature/sci8.png";
 import bgVideo from "../../assets/New/testvedio.mp4";
 // import videoBg from "../../assets/New/testv2.mp4";
 import videoBg from "../../assets/New/doctorvedio.mp4";
@@ -126,8 +127,10 @@ const MainPage = () => {
               </h1>
             </div>
             <p className="mt-2 text-sm sm:text-base md:text-xl xl:text-[1.55rem] text-slate-800 font-medium tracking-tight max-w-xl lg:max-w-none fade-in fade-in-delay-1">
-              Complete career and college readiness for every student. Free for
-              schools.
+              {/* Complete career and college readiness for every student. Free for
+              schools. */}
+              Higher education and school partnership initiative <br />
+              India's first structured school to university transition program
             </p>
           </div>
 
@@ -143,7 +146,7 @@ const MainPage = () => {
               to="/apply"
               className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-[#1d1d1f] hover:bg-black text-white text-sm sm:text-base font-medium tracking-tight transition-all duration-200"
             >
-              Apply
+              Nominate
             </Link>
           </div>
         </div>
@@ -228,6 +231,13 @@ const MainPage = () => {
           title="Read. Explore. Decide"
           description="A set of 11 career readiness books and e-books, designed grade-wise and stream-wise to support students through different stages of school. They bring career exploration, education choices, future pathways and decision-making into a format students can revisit, reflect on and use throughout their journey."
           image={sci7}
+        />
+
+        <ScienceSection
+          eyebrow="Connect & Guide on WhatsApp"
+          title="One Number. Ongoing Guidance."
+          description="A single CRI WhatsApp number that acts as a student dashboard, bringing career guidance and ongoing support into one conversation. Students can explore careers, courses, colleges and entrance exams, book counselling sessions, receive psychometric reports and connect with university counsellors for personalised human guidance."
+          image={sci8}
         />
       </div>
 

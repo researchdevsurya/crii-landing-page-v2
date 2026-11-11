@@ -185,7 +185,7 @@ const DeviceShowcase = () => {
             </p>
             <h2
               className="
-                text-[clamp(2.5rem,5.2vw,5rem)]
+                text-[clamp(2.5rem,5rem,4rem)]
                 font-semibold
                 leading-[0.94]
                 tracking-[-0.035em]

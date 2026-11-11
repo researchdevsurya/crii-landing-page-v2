@@ -1,0 +1,45 @@
+        {/* Career Ready India is a{" "}
+              <span className="font-bold">complete</span> career and college
+              readiness ecosystem for{" "}
+              <span className="font-bold">every student</span>, built into the
+              school and provided at <span className="font-bold">no cost</span>. */}
+              {/* Career Ready India is a{" "}
+              <span className="font-bold">
+                higher education and school partnership initiative
+              </span>
+              . CRI provides{" "}
+              <span className="font-bold">
+                assessments, counselling, career education, research tools,
+                student guidance and counsellor training
+              </span>
+              . Leading Indian universities guide students from{" "}
+              <span className="font-bold">Grade 8 onwards</span> in
+              understanding{" "}
+              <span className="font-bold">
+                career fields and specialisations, degrees and their outcomes
+              </span>
+              . */}
+              {/* Higher Education and School Partnership Initiative for informed
+              education decision. <br />
+              For select schools, CRI and a consortium of{" "}
+              <span className="font-bold">
+                leading Indian private universities
+              </span>{" "}
+              cover the full cost of{" "}
+              <span className="font-bold">
+                psychometric assessments, counselling, expert sessions,
+                counsellor certification, and career education through books and
+                smartboards
+              </span>
+              , with{" "}
+              <span className="font-bold">
+                zero hidden charges for schools or students
+              </span>
+              . <br />
+              Universities guide students from{" "}
+              <span className="font-bold">Grade 8 onwards</span> in
+              understanding{" "}
+              <span className="font-bold">
+                career fields, specialisations, degrees, and their outcomes
+              </span>
+              . */}
