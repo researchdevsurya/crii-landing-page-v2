@@ -496,10 +496,10 @@ export default function StudentPathwaysHero() {
         >
           <div className="mx-auto max-w-9xl w-full">
             <p className="mb-3 text-sm sm:text-base md:text-lg font-semibold uppercase tracking-[-0.08em] text-gray-700 text-center">
-              WHAT IS CAREER READY INDIA
+              WHAT IS CAREER READY INDIA IS
             </p>
             <p className="mb-4 sm:mb-6 md:mb-8 font-bold text-center  text-4xl md:text-6xl lg:text-7xl leading-[1] text-gray-900">
-              Higher Education and School Partnership Initiative for Informed
+              A Higher Education and School Partnership Initiative for Informed
               Education Decisions
             </p>
             <br />
